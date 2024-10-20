@@ -1,0 +1,27 @@
+# kubectl create deploy test-deploy --image=httpd --replicas=5 --dry-run=client -o yaml > deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-deploy
+  name: test-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: test-deploy
+  template:
+    metadata:
+      labels:
+        app: test-deploy
+    spec:
+      containers:
+        - image: httpd:alpine3.18
+          name: httpd
+          command: ["/bin/bash", "-C"] # override the default command
+          args: ["sleep 5; exit 1"] # sleep for 30 seconds then exit with an error
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
