@@ -1,0 +1,12 @@
+# kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+    method: fromcode
+  name: nginx-yaml
+spec:
+  containers:
+  - image: nginx
+    name: nginx
