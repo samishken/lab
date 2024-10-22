@@ -1,0 +1,29 @@
+# nginx Pod with volume
+# to access the container `k exec -it nginx-storage -- bash`
+# Two containers in a Pod can share same volume
+# to access container is a pod where there are "nginx" & "busybox" containers 
+# `k exec -it nginx-storage -c nginx -- bash`
+# `k exec -it nginx-storage -c busybox -- sh`
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+  name: nginx-storage
+spec:
+  containers:
+    - image: nginx
+      name: nginx
+      volumeMounts:  # volume on container level
+        - mountPath: /scratch  # location of volume in the container / new directory will be created
+          name: scratch-volume
+    - image: busybox
+      name: busybox
+      command: ["/bin/sh", "-c"]
+      args: ["sleep 1000"]
+      volumeMounts:  # volume on container level
+        - mountPath: /scratch  # location of volume in the container / new directory will be created
+          name: scratch-volume
+  volumes:  # volume on pod level
+    - name: scratch-volume  # matches the name of volumeMounts
+      emptyDir:
+        sizeLimit: 500Mi
