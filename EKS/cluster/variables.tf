@@ -1,12 +1,12 @@
-# variable "pubsub1" {
-#   type = string
-#   default = "subnet-051"
-# }
+variable "pubsub1" {
+  type = string
+  default = "subnet-0ee426c1fcbbf9afe"
+}
 
-# variable "pubsub2" {
-#   type = string
-#   default = "subnet-022"
-# }
+variable "pubsub2" {
+  type = string
+  default = "subnet-0a5079abecb77d681"
+}
 
 variable "eksIAMRole" {
   type = string
