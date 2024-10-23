@@ -40,7 +40,7 @@ resource "aws_eks_cluster" "eks" {
   version = var.k8sVersion
   vpc_config {
     # You can set these as just private subnets if the Control Plane will be private
-    subnet_ids = [aws_subnet.pubsub1.id, aws_subnet.pubsub2.id]
+    subnet_ids = [var.pubsub1, var.pubsub2]
   }
 
   depends_on = [
