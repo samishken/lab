@@ -1,4 +1,4 @@
-# IAM Role for EKS to have access to the appropriate resources
+# IAM Role for EKS to have access to the appropriate resources   #test
 resource "aws_iam_role" "eks-iam-role" {
   name = var.eksIAMRole
 
