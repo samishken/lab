@@ -40,7 +40,7 @@ resource "aws_eks_cluster" "eks" {
   version = var.k8sVersion
   vpc_config {
     # You can set these as just private subnets if the Control Plane will be private
-    subnet_ids = [aws_subnet.pubsub1.id, aws_subnet.pubsub2.id]
+    subnet_ids = [var.pubsub1, var.pubsub2]
   }
 
   depends_on = [
@@ -98,8 +98,8 @@ resource "aws_eks_node_group" "worker-node-group" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "workernodes-${var.environment}"
   node_role_arn   = aws_iam_role.workernodes.arn
-  subnet_ids      = [aws_subnet.pubsub1.id, aws_subnet.pubsub1.id]
-  instance_types = var.instanceType
+  subnet_ids      = [var.pubsub1, var.pubsub2]
+  instance_types  = var.instanceType
 
   scaling_config {
     desired_size = var.desired_size
