@@ -1,0 +1,18 @@
+# k expose deployment frontend --port 8080
+# k get svc testService -o yaml > service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grafana
+  name: grafana-loadbalancer
+  namespace: monitoring
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app.kubernetes.io/instance: prometheus-stack
+    app.kubernetes.io/name: grafana
+  type: LoadBalancer
