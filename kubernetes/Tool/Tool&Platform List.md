@@ -1,3 +1,6 @@
+# kustomize
+- helps us determine the size of resouce we should deploy in each environment
+
 # Autoscaler
 - Karpenter (helps keep cost down and it's much faster than cluster autoscaler)
 

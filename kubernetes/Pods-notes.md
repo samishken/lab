@@ -1,4 +1,4 @@
-## vimrc
+## vimrc - can help setup command line
 
 # kubectl reference from k8s documentation
 https://kubernetes.io/docs/reference/kubectl/generated/kubectl/
@@ -31,7 +31,7 @@ https://kubernetes.io/docs/reference/kubectl/generated/kubectl/
 ---- Single container
 ---- Multi container
 ---- Init container
-
+---- Pod logs:  "kubectl logs nginx-phpfpm -c php-fpm-container"
 
 ## Networking
 - # Pods
@@ -77,3 +77,11 @@ https://kubernetes.io/docs/reference/kubectl/generated/kubectl/
 ---- A pod can have multiple containers sharing one volume.
 -    - # Ephemeral Storage `short term`
 -    - # Persistent Storage
+
+
+# kustomize
+- Can help manuplate with how much resource we want to deploy to each environment
+
+
+# Sosivio - resource optimization
+- cost savings
