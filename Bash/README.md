@@ -41,3 +41,36 @@ EOF >>
 > echo $?  = 1 (values are not the same)
 
 # if/Elif/Else
+
+# Array
+#### MY_FIRST_LIST=(one two three four five)
+> echo $MY_FIRST_LIST = one
+> echo ${MY_FIRST_LIST[@]} = one two three four five
+> echo ${MY_FIRST_LIST[2]} = three
+
+# For Loop
+> for item in ${MY_FIRST_LIST[@]}; do echo -n $item | wc -c; done
+--- 3 3 5 4 4 (counts the letters in MY_FIRST_LIST)
+
+
+# Functions (for repeated codes)
+
+
+# AWK
+> echo one two three > textfile.txt
+> awk '{print $1}' textfile.txt
+> one
+> awk '{print $2}' textfile.txt
+> two
+
+> awk -F, '{print $1}' csvtest.csv
+> echo "Just get this word: Hello" | awk '{print $5}'
+> echo "Just get this word: Hello" | awk -F: '{print $2}' | cut -c2-
+
+
+# SED
+- used to change words in files
+> sed 's/fly/grasshopper/g' sedtext.txt 
+> sed -i.ORIGINAL 's/fly/grasshopper/g' sedtest.txt
+-  change "fly" with "grasshopper" in sedtext.txt file
+
