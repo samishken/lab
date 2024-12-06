@@ -67,3 +67,18 @@ other infrastructure services through a single, standardized configuration langu
 ##### Splat expression
 - expression to help structure the outputs that we create to display everything we need.
 - a shorthand way to perform common operations, 
+
+
+##### Data Types
+- string
+- numberic
+- bool
+- list
+- set
+- map
+- null
+
+# for expressions
+- [ for i in github_repository.mtc_repo[*] : i.name ]
+- [ for i in github_repository.mtc_repo[*] : "${i.name} : ${i.http_clone_url}" ][0]
+-
