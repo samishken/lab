@@ -1,7 +1,3 @@
-
-
-
-
 import boto3  # Importing the AWS SDK for Python to interact with AWS services.
 
 # Function to extract the volume ID from a given volume ARN.
