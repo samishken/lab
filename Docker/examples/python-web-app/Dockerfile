@@ -7,13 +7,11 @@ WORKDIR /app
 COPY requirements.txt /app
 COPY devops /app
 
-# install python
+# Install Python and pip, and install dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    pip install -r requirements.txt && \
-
-# Ensure devops directory exists and set it as the working directory
-WORKDIR /app/devops   
+    apt-get install -y python3-requests python3-pip && \
+    pip install --break-system-packages -r requirements.txt && \
+    cd devops
 
 # starting command ENTRYPOINT & CMD
 # ENTRYPOINT: Executable can not be changed
