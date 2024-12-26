@@ -11,28 +11,28 @@ The master node manages the Kubernetes cluster and is responsible for the orches
     <br> Controller Manager (kube-controller-manager) <br>
         - Runs controller processes that ensure the desired state of the cluster. <br>
         - Key controllers include: <br>
-            § Node Controller: Manages node availability and health. <br>
-            § Replication Controller: Ensures the correct number of pod replicas. <br>
-            § Endpoint Controller: Updates endpoints for services. <br>
-            § Job Controller: Manages job objects. <br>
-    <br> Scheduler (kube-scheduler) 
+            ---- Node Controller: Manages node availability and health. <br>
+            ---- Replication Controller: Ensures the correct number of pod replicas. <br>
+            ---- Endpoint Controller: Updates endpoints for services. <br>
+            ---- Job Controller: Manages job objects. <br>
+    <br> Scheduler (kube-scheduler) <br>
         - Assigns pods to nodes based on resource availability, constraints, and policies. <br>
         - Considers CPU, memory, affinity rules, and taints/tolerations. <br>
-    <br> etcd
+    <br> etcd <br>
         - A distributed key-value store that acts as the cluster's backing store. <br>
         - Stores all cluster data, including configuration, secrets, and the current state. <br>
 
 ##### Data Plane
 Worker nodes host the application workloads (pods) and provide the runtime environment for containers. Each worker node includes:
-    <br> Kubelet
-        - An agent that communicates with the API server to ensure containers are running as specified.
-        - Manages pod lifecycle on the node.
-    <br> Kube-proxy
-        - A network proxy that maintains network rules for pod communication.
-        - Implements service discovery and routing between pods and services.
-    <br> Container Runtime
-        - Runs and manages containers on the node (e.g., Docker, containerd, CRI-O).
-        - Ensures containers are pulled, started, and stopped as needed.
+    <br> Kubelet <br>
+        - An agent that communicates with the API server to ensure containers are running as specified. <br>
+        - Manages pod lifecycle on the node. <br>
+    <br> Kube-proxy <br>
+        - A network proxy that maintains network rules for pod communication. <br>
+        - Implements service discovery and routing between pods and services. <br>
+    <br> Container Runtime <br>
+        - Runs and manages containers on the node (e.g., Docker, containerd, CRI-O). <br>
+        - Ensures containers are pulled, started, and stopped as needed. <br>
 
 
 ##### Docker vs ContainerD
