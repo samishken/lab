@@ -1,4 +1,4 @@
-FROM ubuntu:alpine
+FROM ubuntu
 
 # CD to /app folder
 WORKDIR /app
