@@ -6,7 +6,8 @@
 - Add `nodeName` to assign pod to specific node manually
 ##### Here is an example of a Pod spec using the nodeName field:
 
-```apiVersion: v1
+```
+apiVersion: v1
 kind: Pod
 metadata:
   name: nginx
@@ -15,6 +16,7 @@ spec:
   - name: nginx
     image: nginx
   nodeName: kube-01
+  ```
 
 
 ### Labels & Selectors (Annotations)
