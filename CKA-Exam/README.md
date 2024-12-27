@@ -78,6 +78,23 @@ Worker nodes host the application workloads (pods) and provide the runtime envir
 
 #### Namespaces
 - namespaces provide a mechanism for isolating groups of resources within a single cluster
+- kube-system
+- Default namespace
+- kube-public
+
+
+#### Imperative vs Declarative
+- Imperative: a set of instruction added step by step
+----- `kubectl run --image=nginx nginx`
+----- `kubectl create deployment --image=nginx nginx`
+----- ```kubectl create deployment --image=nginx nginx --dry-run=client -o yaml```
+----- `kubectl replace -f nginx.yml`
+----- `kubectl expose deployment nginx --port 80`
+----- `kubectl edit deployment nginx`
+----- `kubectl scale deploymenbt nginx --replicas=5`
+
+- Declarative: declare the final outcome (Terraform, Ansible, Groovy)
+----- add declarative files
 
 
 <br>

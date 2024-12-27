@@ -1,0 +1,11 @@
+# Here is an example of a Pod spec using the nodeName field:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeName: kube-01  # Manually scheduling pod to a node
