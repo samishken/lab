@@ -1,5 +1,4 @@
-#
-
+# Kubernetes
 
 ## Kubernetes Architecture
 <br><br>
@@ -8,10 +7,13 @@
 The master node manages the Kubernetes cluster and is responsible for the orchestration of worker nodes. It contains the following components:
 ####  API Server (kube-apiserver)
         - The main entry point to the Kubernetes control plane. <br>
+        - Authenticate User, Validate Request, Retrieve data, Update ETCD, Scheduler, Kubelet <br>
         - Exposes RESTful APIs for communication with the cluster. <br>
         - Handles authentication, authorization, and validation of requests. <br>
 #### Controller Manager (kube-controller-manager)  
         - Runs controller processes that ensure the desired state of the cluster. <br>
+        - monitors, continously on the look out for the state of pods.
+        - Checks every 5 seconds. Gives 40 seconds for bad Pods to come back up. 
         - Key controllers include: <br>
             ---- Node Controller: Manages node availability and health. <br>
             ---- Replication Controller: Ensures the correct number of pod replicas. <br>
@@ -20,15 +22,22 @@ The master node manages the Kubernetes cluster and is responsible for the orches
 #### Scheduler (kube-scheduler)  
         - Assigns pods to nodes based on resource availability, constraints, and policies. <br>
         - Considers CPU, memory, affinity rules, and taints/tolerations. <br>
+        - Decides which pod goes to which node <br>
+        - ps -aux | grep scheduler <br>
 #### etcd  
         - A distributed key-value store that acts as the cluster's backing store. <br>
         - Stores all cluster data, including configuration, secrets, and the current state. <br>
+        - Nodes, PODs, Configs, Secrets, Accounts, Roles, Bindings, Others. <br>
+        - ./etcdctl version <br>
+        - ./etcdctl get key1
+        - ./etcdctl put key1 value1
 
 ## Data Plane
 Worker nodes host the application workloads (pods) and provide the runtime environment for containers. Each worker node includes:
 ####     Kubelet <br>
         - An agent that communicates with the API server to ensure containers are running as specified. <br>
         - Manages pod lifecycle on the node. <br>
+        - ps -aux | grep kubelet <br>
 ####     Kube-proxy <br>
         - A network proxy that maintains network rules for pod communication. <br>
         - Implements service discovery and routing between pods and services. <br>
@@ -38,9 +47,37 @@ Worker nodes host the application workloads (pods) and provide the runtime envir
 
 
 ## Docker vs ContainerD
+        - 
+
+#### Pod
+- A Pod is a single instance of an application. A Pod is the smallest object that we can create in Kubernetes.
+- Pods are ephemeral in Kubernetes, meaning they are intended to be disposable and replaceable
+- A pod can be multi-container (we can add helper containers). Example, Service mesh and Sidecar
+- `kubectl run nginx --image=nginx`
+- `kubectl run redis --image=redis --dry-run -o yaml > redis-pod.yml`
 
 
+#### ReplicaSets
+- purpose is to maintain a stable set of replica Pods running at any given time.
+- `kubectl scale rs new-replica-set --replicas=5`  [update replicas number]
 
+
+#### Deployments
+- A Deployment manages a set of Pods to run an application workload, usually one that doesn't maintain state.
+- tells Kubernetes how to create or modify instances of the pods that hold a containerized application. 
+- `kubectl get all`
+- `kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml`
+
+#### Services
+- Node Port - Exposes the Service on each Node's IP at a static port (the NodePort).
+- ClusterIP - Exposes the Service on a cluster-internal IP
+- LoadBalancer - Exposes the Service externally using an external load balancer. Kubernetes does not directly offer a load balancing component; you must provide one, or you can integrate your Kubernetes cluster with a cloud provider.
+<br>
+- Use lables and selectors to connect Services with Pods
+
+
+#### Namespaces
+- namespaces provide a mechanism for isolating groups of resources within a single cluster
 
 
 <br>
