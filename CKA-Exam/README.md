@@ -46,6 +46,11 @@ Worker nodes host the application workloads (pods) and provide the runtime envir
         - Ensures containers are pulled, started, and stopped as needed. <br>
 
 
+## Networking
+##### Default Service kube-dns
+- Kubernetes creates DNS records for Services and Pods. You can contact Services with consistent DNS names instead of IP addresses.
+- For Pod (webapp) to connect to Pod (database), first it looks for the IP address of DB Pod inside Kube-dns records. Once confirmed then it goes ahead and make the connection.
+
 ## Docker vs ContainerD
         - 
 
@@ -78,6 +83,7 @@ Worker nodes host the application workloads (pods) and provide the runtime envir
 
 #### Namespaces
 - namespaces provide a mechanism for isolating groups of resources within a single cluster
+- partitioning resources
 - kube-system
 - Default namespace
 - kube-public
