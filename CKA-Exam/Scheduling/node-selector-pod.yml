@@ -1,0 +1,12 @@
+# `nodeSelector` - assigns the pod to specific nodes which has label "size: large"
+# Label Nodes   `kubectl label nodes <node-name> <label-key>=<label-value>` 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  nodeSelector:   # the same lable should be find in the Node
+    size: Large
