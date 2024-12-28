@@ -94,3 +94,50 @@ spec:
 ### Resource Limits & Requests  (*** Review this section Again ***)
 - CPU & Memory limits
 - The Scheduler takes into consideration the amount of resources required by a pod and those available on the nodes and identifies the best node to place a pod on. 
+
+
+## Resource LimitRange
+- A LimitRange is used to enforce default resource limits and constraints on a namespace, such as CPU, memory requests, and limits for pods or containers.
+
+## Resource Quotas
+- A ResourceQuota is used to set constraints on the total resource consumption within a namespace, such as CPU, memory, and object counts.
+
+
+## DaemonSets
+- DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to them.
+- DaemonSets helps us deploy multiple instances of pod. But it runs one copy of Pod on each Node in the cluster.
+- DaemonSets are used when a single copy of an application must run on all or a subset of the nodes in the cluster. 
+- DaemonSets are often used for system-level services, like proxies or load balancers, that need to run on every node. 
+- DaemonSets automatically scale when nodes are added or removed from the cluster.
+- Use Case: If we want to add a monitoring agent or log collector for each of the node in the cluster.
+- `kubernetes get daemonset -A -o wide`
+
+## Static Pods
+- Static Pods are managed directly by the kubelet daemon on a specific node, without the API server observing them.
+- In the case of no Master Node, Add the pod definition file in this directory `/etc/kubernetes/manifests`
+- To configure `--pod-manifest-path=/etc/kubernetes/manifests`
+- Best way to configure
+------ Check "kubelet.service" file to see if `--config=kubeconfig.yaml` exists
+------ kubeconfig.yaml (`staticPodPath: /etc/kubernetes/manifests`)
+------ Use `docker ps` command to manage created Pods
+- ###### Static Pod Use Case
+- Can be used to create multiple Master nodes (controlplane)
+- Can be used to Deploy controlplane components as Static Pods
+- `kubectl ssh node NODE_NAME`
+
+
+## Deploying Multiple Schedulers
+- Default scheduler is configured in `scheduler-config.yaml`
+- my-scheduler-2-config.yaml
+```
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+- scheduleName: my-scheduler-2
+leaderElection:
+  leaderElect: true
+  resourceNamespace: kube-system
+  resourceName: lock-object-my-scheduler
+```
+## Scheduler Profile
+- A scheduling Profile allows you to configure the different stages of scheduling in the kube-scheduler.

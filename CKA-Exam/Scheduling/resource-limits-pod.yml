@@ -16,3 +16,41 @@ spec:
       limits:
         memory: "6Gi"
         cpu: 4
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: example-limitrange
+  namespace: default
+spec:
+  limits:
+    - type: Container
+      default:  # limit
+        cpu: "500m"
+        memory: "256Mi"
+      defaultRequest:  # request
+        cpu: "250m"
+        memory: "128Mi"
+      max:  # limit
+        cpu: "1"
+        memory: "512Mi"
+      min:  # request
+        cpu: "100m"
+        memory: "64Mi"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: example-resourcequota
+  namespace: default
+spec:
+  hard:
+    pods: "10"                     # Maximum number of pods in the namespace
+    requests.cpu: "2"              # Total CPU requests across all pods
+    requests.memory: "4Gi"         # Total memory requests across all pods
+    limits.cpu: "4"                # Total CPU limits across all pods
+    limits.memory: "8Gi"           # Total memory limits across all pods
+    configmaps: "5"                # Maximum number of ConfigMaps
+    persistentvolumeclaims: "3"    # Maximum number of PersistentVolumeClaims
+    services: "5"                  # Maximum number of Services
+
