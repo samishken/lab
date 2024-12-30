@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args: ["shuf -i 0-100 -n 1 >> /opt/number.out;"]
+    volumeMounts:
+    - mountPath: /opt
+      name: data-volume
+
+  
+  volumes:
+  - name: data-volume
+    hostPath:   #option 1
+      path: /data
+      type: Directory
+  - name: data-volume2
+    awsElasticBlockStore:   #option 2
+      volumeID: <volume-id>
+      fsType: ext4
+# - name: data-volume3
+#   cephfs:   #option 3
