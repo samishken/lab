@@ -58,8 +58,10 @@ Worker nodes host the application workloads (pods) and provide the runtime envir
 - A Pod is a single instance of an application. A Pod is the smallest object that we can create in Kubernetes.
 - Pods are ephemeral in Kubernetes, meaning they are intended to be disposable and replaceable
 - A pod can be multi-container (we can add helper containers). Example, Service mesh and Sidecar
+- Connect to pod `kubectl exec -it POD-NAME -- sh`
 - `kubectl run nginx --image=nginx`
 - `kubectl run redis --image=redis --dry-run -o yaml > redis-pod.yml`
+- `kubectl logs POD-NAME`
 
 
 #### ReplicaSets
