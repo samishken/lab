@@ -6,6 +6,11 @@ Elasticsearch is a distributed search and analytics engine that can store and in
 
 Together, these three components provide a comprehensive logging solution that can handle a large amount of data and provide real-time insights into the behavior of complex systems.
 
+1) Filebeat (Fluentd) collects log events from different resources. Uses K8s API to pull Pod info.
+--- Port  
+2) Elasticsearch is used to store and index logs. 
+3) Kibana is used to visualize logs and provide real-time insights into the behavior of systems.
+
 ### Elasticsearch
 Elasticsearch is the heart of the EFK stack. It is a distributed search and analytics engine that can store and index large amounts of data. Elasticsearch can be used for a variety of use cases, including search, logging, and analytics.
 
@@ -20,3 +25,6 @@ In the context of EFK, Fluentd is used to collect logs from various sources, inc
 Kibana is a data visualization tool that allows users to interact with data stored in Elasticsearch and create custom dashboards and visualizations. Kibana provides a variety of visualization options, including charts, tables, and maps, allowing users to explore and analyze data in different ways.
 
 In the context of EFK, Kibana is used to visualize logs and provide real-time insights into the behavior of systems. Users can create custom dashboards that display key metrics and trends, allowing them to monitor the health and performance of their applications and infrastructure.
+
+### Filebeat
+Filebeat is a lightweight shipper for forwarding and centralizing log data. Installed as an agent on your servers, Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing.
