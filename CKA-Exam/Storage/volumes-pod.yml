@@ -8,12 +8,10 @@ spec:
     image: alpine
     command: ["/bin/sh", "-c"]
     args: ["shuf -i 0-100 -n 1 >> /opt/number.out;"]
-    volumeMounts:
+    volumeMounts:  # helps it store data in this folder stored outside of the container
     - mountPath: /opt
       name: data-volume
-
-  
-  volumes:
+  volumes:  # this helps data to be stored from container to this location.
   - name: data-volume
     hostPath:   #option 1
       path: /data

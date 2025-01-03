@@ -62,6 +62,7 @@ spec:
 - `kubectl get persistentvolume`
 
 ##### Persistent Volume Claims
+- pointer to the configuration of HOW we want the mount to be implemented
 - Persistent volumes are created by Admins
 - Persistent Volume Claims are created by Users
 - Once the PVC are created, k8s binds the PV to PVC based on the request and properties set on the volume.
@@ -71,3 +72,4 @@ spec:
 - Access Mode Mismatch
 
 ##### StorageClasses and Binding
+- StorageClass links PV & PVC
