@@ -38,7 +38,7 @@
 - a / b = Divides a by b 
 - a ** b = Elevates a to the power of b. For non integer values of b, this becomes a root (i.e. a**(1/2) is the square root of a)
 - a // b = (FLOOR DIVISION) The integer part of the integer division of a by b (no remainder)
-- a % b = The remainder part of the integer division of a by b
+- a % b = (Modulo operator) The remainder part of the integer division of a by b
 
 
 ### Expression
@@ -54,16 +54,18 @@ Some data types can be mixed and matched due to implicit conversion.
 - We needed to call the str() function to convert the number into a string. 
 - `print("The average size is: " + str(average))`
 
+### Comparison operators
+- a == b: a is equal to b
+- a != b: a is different than b
+- a < b: a is smaller than b
+- a <= b: a is smaller or equal to b
+- a > b: a is bigger than b
+- a >= b: a is bigger or equal to b
 
-### Comparison (addition, subtraction, and division)
-- Small than: <
-- Greater than: >
-- == Two things are equal to each other
-- != not equal
 ##### logical operators (These logical operators are AND, OR and NOT)
-- And: To evaluate as true the and operator would need both expressions to be true at the same time here.
-- OR: the expression will be true if either of the expressions are true
-- False: false only when both expressions are false
+- a and b: True if both a and b are True. False otherwise.
+- a or b: True if either a or b or both are True. False if both are False.
+- not a: True if a is False, False if a is True.
 
 
 
@@ -71,7 +73,9 @@ Some data types can be mixed and matched due to implicit conversion.
 ##### While loops: 
 - instruct your computer to continuously execute your code based on the value of a condition
 - the body of the block can be executed multiple times instead of just once
-- 
+- If you try to use a variable without first initializing it, you'll run into a NameError.
+- infinite loop: a loop that keeps executing and never stops.
 ##### For loops
+
 ##### Recursion
 
