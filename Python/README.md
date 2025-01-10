@@ -5,6 +5,8 @@
 - print: writes text on the screen
 - type: tells us the type of a certain value `print(type(a))`
 - str: converts a number into a string
+- end:  If we want print to write something else instead of the newline character, we use the end=" "
+- 
 #####  define our own functions
 - Define function `def`  
 - Definition name of "greeting" -> `def greeting(name, department):`
@@ -75,7 +77,11 @@ Some data types can be mixed and matched due to implicit conversion.
 - the body of the block can be executed multiple times instead of just once
 - If you try to use a variable without first initializing it, you'll run into a NameError.
 - infinite loop: a loop that keeps executing and never stops.
+- Use while loops when you want to repeat an action until a condition changes.
 ##### For loops
+- A for loop iterates over a sequence of values. 
+- A very simple example of a for loop is to iterate over a sequence of numbers.
+- Use for loops when there's a sequence of elements that you want to iterate. 
 
 ##### Recursion
 
