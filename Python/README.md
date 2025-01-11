@@ -17,9 +17,43 @@
 - def area_triangel(base, height): return base*height/2
 
 ### Python Data Types
-- Strings
+- Strings: are immutable (can't be modified). used to represent a piece of text.
+- --- Modify strings: since they are immutable only solution to modify is to create a new string.
+----- String Slice: portion of a string that can contain more than one character; also sometimes called a substring.
+----- String Range: color[1:4]
+- list:
+- dictionaries
 - Integer (whole number without fractions)
 - Float (Number with fractions)
+
+### Methods: 
+--- index: is a function associated with a specific class.
+- --- `word = "supercalifragilisticexpialidocious"`
+- --- `word.index("x")`
+--- in: `"super" in word` returns True or false
+--- Upper & Lower: 
+--- .strip(), .lstrip(), .rstrip()
+---- `" yes ".strip()` # "yes"
+---- `" yes ".lstrip()` # "yes "
+---- `" yes ".rstrip()` # " yes"
+
+--- .count() : checks how many times a string appear in a list.
+------- `"The number of time e occurs in this string is 4".count("e")`  #4
+
+--- .endswith(): returns whether the string ends with a certain substring.
+--- .isnumeric():  returns whether the string's made up of just numbers.
+------ we can use "int" function to convert a number string (`int("1234456")`) to actual number
+
+--- .join(): can be used for concatenating. Play video starting at :3:5 and follow transcript3:05
+To use the join method, we have to call it on the string that'll be used for joining. 
+
+--- .split(): returns a list of all the words in the initial string and it automatically splits by any whitespace.
+------ `"This is another example".split()`  # ["This", "is", "another", "example"]
+
+--- .format(): #
+------ `print("Your lucky number is {number}, {name}.".format(name=name, number=len(name)*3))`
+------ `print("Base price: ${:.2f}. with Tax: ${:.2f}".format(price, with_tax))`
+------ result with two decimals ## Base price: $7.50. with Tax: $8.18
 
 ### Python Variables
 - Variables are names that we give to certain values in our programs.
