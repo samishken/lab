@@ -21,8 +21,9 @@
 - --- Modify strings: since they are immutable only solution to modify is to create a new string.
 ----- String Slice: portion of a string that can contain more than one character; also sometimes called a substring.
 ----- String Range: color[1:4]
-- list:
-- dictionaries
+- list: are defined using square brackets, with the elements stored in the list separated by commas.
+- Tuples: are sequences of elements of any type that are immutable. Modifying is not allowed. Unpack Tuples
+- Dictionaries
 - Integer (whole number without fractions)
 - Float (Number with fractions)
 
