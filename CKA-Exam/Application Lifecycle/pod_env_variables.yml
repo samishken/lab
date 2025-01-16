@@ -1,0 +1,14 @@
+# this is if we have only one or two env varialbe. Otherwise we need to create ConfigMap file and inject to Pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu 
+spec:
+  containers:
+  - name: ubuntu 
+    image: ubuntu
+    ports:
+      - containerPort: 8080
+    env:  
+      - name: APP_COLOR
+        value: pink      

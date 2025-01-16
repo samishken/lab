@@ -1,0 +1,43 @@
+# `kubectl create configmap app-config --from-literal=APP_COLOR=blue`
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: blue
+  APP_MODE: prod
+---
+# when we want to inject all env variables from config map
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu 
+spec:
+  containers:
+  - name: ubuntu 
+    image: ubuntu
+    ports:
+      - containerPort: 8080
+    envFrom:
+      - configMapRef:
+          name: app-config
+--- 
+# when we want to inject only of of the env varialbles
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+spec:
+  containers:
+  - image: kodekloud/webapp-color
+    name: webapp-color
+    env:
+    - name: APP_COLOR
+      valueFrom:
+        configMapKeyRef:
+          name: webapp-config-map
+          key: APP_COLOR
+
+         

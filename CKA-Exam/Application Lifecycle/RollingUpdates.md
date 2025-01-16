@@ -10,3 +10,4 @@ To get history of deployment
 - To update deployment `kubectl apply -f deployment-definition.yml`
 - or we can also update image -> `kubectl set image deployment/myapp-deployment nginx-container=nginx:1.7.1`
 - `kubectl set image deployment/<deployment-name> <container-name>=<image-name>`
+

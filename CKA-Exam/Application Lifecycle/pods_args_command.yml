@@ -1,0 +1,2 @@
+# How to create pod with args from command line
+# `kubectl run webapp-green --image=kodekloud/webapp-color -- --color green`
