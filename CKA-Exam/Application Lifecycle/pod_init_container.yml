@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: \['sh', '-c', 'echo The app is running! && sleep 3600'\]
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: \['sh', '-c', 'git clone &nbsp;;'\]
+
+--- 
+## To add an init container with the busybox image that sleeps for 
+## 20 seconds before the main container starts, you can modify the YAML manifest as follows:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: red
+spec:
+  containers:
+  - name: red-container
+    image: busybox:1.28
+    command: ["sh", "-c", "echo 'The app is running!' && sleep 3600"]
+  initContainers:
+  - name: init-container
+    image: busybox
+    command: ["sh", "-c", "sleep 20"]
