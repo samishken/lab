@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flashcards</title>
+</head>
+<body>
+    <h1>Flashcards</h1>
+    <ul>
+        {% for card in flashcards %}
+        <li>
+            <a href="{{ url_for('view_flashcard', index=loop.index0) }}">{{ card.question }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_flashcard') }}">Add a new flashcard</a>
+</body>
+</html>
+
