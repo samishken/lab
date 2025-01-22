@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Flashcard Details</title>
+</head>
+<body>
+    <h1>Flashcard Details</h1>
+    <p><strong>Question:</strong> {{ card.question }}</p>
+    <p><strong>Answer:</strong> {{ card.answer }}</p>
+    <a href="{{ url_for('flashcards.index') }}" class="btn">Back</a>
+</body>
+</html>
