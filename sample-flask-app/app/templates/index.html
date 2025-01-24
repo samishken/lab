@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Flashcards</title>
+</head>
+<body>
+    <h1>Flashcards</h1>
+    <a href="{{ url_for('flashcards.add_flashcard') }}" class="btn">Add Flashcard</a>
+    <div class="flashcards">
+        {% for card in flashcards %}
+        <div class="flashcard">
+            <p><strong>Question:</strong> {{ card.question }}</p>
+            <a href="{{ url_for('flashcards.view_flashcard', card_id=card.id) }}" class="btn">View</a>
+            <form action="{{ url_for('flashcards.delete_flashcard', card_id=card.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="btn delete">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
