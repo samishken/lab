@@ -55,9 +55,9 @@ module "eks" {
       most_recent = true
     }
   }
-
+  # to create autoscaling group
   eks_managed_node_groups = {
-    initial = {
+    eks-node = {
       instance_types = ["t3.small"]
       min_size       = 2
       max_size       = 4
