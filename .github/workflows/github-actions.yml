@@ -29,7 +29,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./terraform
+        working-directory: ./terraform/setup_tf_envs/tf-src/envs/dev
 
     steps:
       - name: Checkout source code
@@ -57,7 +57,7 @@ jobs:
 
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve -input=false -parallelism=1 planfile
+        run: terraform apply -auto-approve -input=false -parallelism=1 planfile  # build resources 1 at a time
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -84,7 +84,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./terraform
+        working-directory: ./terraform/setup_tf_envs/tf-src/envs/dev
 
     steps:
       - name: Checkout source code
