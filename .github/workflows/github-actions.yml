@@ -1,5 +1,5 @@
 # Workflow Name
-name: "infra-gitops"
+name: "infra-actions"
 
 # Workflow Triggers
 on:
