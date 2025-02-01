@@ -7,7 +7,6 @@ on:
     branches:
       - main
     paths:  
-      ### - terraform/setup_tf_envs/tf-src/envs/dev/**
       - terraform/**
   workflow_dispatch: # Enables manual trigger for destroy job
 
