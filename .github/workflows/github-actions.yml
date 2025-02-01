@@ -5,7 +5,7 @@ name: "infra-actions"
 on:
   push:
     branches:
-      - main
+      - code-actions
     paths:  
       - terraform/**
   workflow_dispatch: # Enables manual trigger for destroy job
