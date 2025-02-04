@@ -31,9 +31,3 @@ variable "tags" {
     App = "eks-cluster"
   }
 }
-
-# variable "tags" {
-#   default = {
-#     App = "eks-cluster"
-#   }
-# }
