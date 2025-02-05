@@ -32,7 +32,7 @@ def lambda_handler(event, context):  # event is cloudwatch event
 
 
 # //
-# The purpose of the above code is to modify the type of an Amazon EBS (Elastic Block Store) volume to gp3 (General Purpose SSD) when triggered by an AWS CloudWatch event. 
+# The purpose of the above code is to modify the type of Amazon EBS (Elastic Block Store) volume to gp3 (General Purpose SSD) when triggered by an AWS CloudWatch event.
 # 
 # Here's a detailed breakdown:
 

@@ -1,3 +1,5 @@
+from tokenize import group
+
 year = int(input("Enter Year: "))
 def is_leap(year):
     leap = False
@@ -12,3 +14,9 @@ def is_leap(year):
     else:
         return False
 print(is_leap(year))
+
+
+# - deep dive into project
+# - CICD experience.. by myself and group(
+#     terraform & python
+# )
