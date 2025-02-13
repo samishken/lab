@@ -1,6 +1,9 @@
 # Cluster Maintenance
-### ETCD
-- State of our cluster is stored in key/value format.
+### ETCD: State of our cluster is stored in key/value format.
+- Get etcd version `kubectl -n kube-system logs etcd-controlplane | grep -i 'etcd-version'`
+- location for ECTC Server Certificate `/etc/kubernetes/pki/etcd/server.crt`
+- Where is the ETCD CA Certificate file located?  `/etc/kubernetes/pki/etcd/ca.crt`
+- 
 - `ectd.service` file
 - `(--data-dir=/var/lib/etcd)`
     - 
@@ -17,6 +20,23 @@
 
     => I | mvcc: restore compact to 475629
     ```
+- The master node in our cluster is planned for a regular maintenance reboot tonight. While we do not anticipate anything to go wrong, we are required to take the necessary backups. Take a snapshot of the ETCD database using the built-in snapshot functionality.
+Store the backup file at location /opt/snapshot-pre-boot.db
+
+    ```
+        ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 \
+        --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+        --cert=/etc/kubernetes/pki/etcd/server.crt \
+        --key=/etc/kubernetes/pki/etcd/server.key \
+        snapshot save /opt/snapshot-pre-boot.db
+    ```
+- Restore
+    ```
+    ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
+    snapshot restore /opt/snapshot-pre-boot.db
+    ```
+- Update `/etc/kubernetes/manifests/etcd.yaml` file
+---
 - update `etcd.service` -> (`--data-dir=/var/lib/etcd-from-backup`)
     - `systemctl daemon-reload`
     - `service etcd restart`
