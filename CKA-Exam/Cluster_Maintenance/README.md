@@ -1,9 +1,15 @@
 # Cluster Maintenance
+### Velero tool is used to backup k8s cluster
 ### ETCD: State of our cluster is stored in key/value format.
 - Get etcd version `kubectl -n kube-system logs etcd-controlplane | grep -i 'etcd-version'`
 - location for ECTC Server Certificate `/etc/kubernetes/pki/etcd/server.crt`
 - Where is the ETCD CA Certificate file located?  `/etc/kubernetes/pki/etcd/ca.crt`
-- 
+- To take backup follow these steps <br>
+---- 1st) Stop kube-apiserver service `service kube-apiserver stop` <br>
+---- 2nd) Snapshot restore
+---- 3rd) update etcd configuration file to use the new data
+---- 4th) reload and restart service
+<br>
 - `ectd.service` file
 - `(--data-dir=/var/lib/etcd)`
     - 
@@ -22,7 +28,7 @@
     ```
 - The master node in our cluster is planned for a regular maintenance reboot tonight. While we do not anticipate anything to go wrong, we are required to take the necessary backups. Take a snapshot of the ETCD database using the built-in snapshot functionality.
 Store the backup file at location /opt/snapshot-pre-boot.db
-
+- Take snapshot
     ```
         ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 \
         --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -33,6 +39,9 @@ Store the backup file at location /opt/snapshot-pre-boot.db
 - Restore
     ```
     ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
+    --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+    --cert=/etc/kubernetes/pki/etcd/server.crt \
+    --key=/etc/kubernetes/pki/etcd/server.key \
     snapshot restore /opt/snapshot-pre-boot.db
     ```
 - Update `/etc/kubernetes/manifests/etcd.yaml` file
