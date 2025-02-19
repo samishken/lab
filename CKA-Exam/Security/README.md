@@ -14,48 +14,49 @@
 ---
 ### TLS Certificates
 - what are TLS certificates? <br>
----- A certificate is used to guarantee trust between two parties during a transaction. <br>
----- Symmetric Encyption: only only key used to authenticate access. <br>
----- Asymmetric Encryption: pair of keys to (private and public) used to authenticate access <br>
----- For Encryption, it's best to used asymmetric encryption with a pair of public and private keys <br>
----- Admin uses a pair keys to secure SSH connectivity to the  servers.  The server uses a pair of keys to secure HTTPS traffic. <br>
----- PKI (Public key Infastructure) <br>
+- - - A certificate is used to guarantee trust between two parties during a transaction. <br>
+- - - Symmetric Encyption: only only key used to authenticate access. <br>
+- - - Asymmetric Encryption: pair of keys to (private and public) used to authenticate access <br>
+- - - For Encryption, it's best to used asymmetric encryption with a pair of public and private keys <br>
+- - - Admin uses a pair keys to secure SSH connectivity to the  servers.  The server uses a pair of keys to secure HTTPS traffic. <br>
+- - - PKI (Public key Infastructure) is the process of issuing, validating, maintaining certificates, as well as all the CAs, involved servers <br>
 
 ---
-<br>
 - Types of Certificates (.crt, .pem): <br>
----- Server certificates - configured on servers: <br>
----- Root certificates - configured on CA servers: <br>
----- Client certificates - configured on clients: <br>
-<br>
+- - - Server certificates - configured on servers: <br>
+- - - Root certificates - configured on CA servers: <br>
+- - - Client certificates - configured on clients: <br>
+
 ---
 - How does Kubernetes use certificates? <br>
+* * 1) Automatically PKI gets generated under `/etc/kubernetes/pki` path when we lauch "KUBEADM". Auto generated CA
+* * 2) 
 ---- all services within the cluster use Server certificates. <br>
 ---- all clients within the cluster use client certficates. <br>
----- Server certificates: <br>
--------- kube-api server (controlplan) <br> 
--------- ETCD server (controlplan) <br>
--------- kubelet server (worker node) <br>
----- Client certificates: <br>
--------- Admin user (need private and public key) <br>
--------- kube-scheduler: need client certificate to authenticate to API-Server <br>
--------- kube-controller-manager: need client certificate to authenticate to API-Server <br>
--------- kube-proxy: need client certificate to authenticate to API-Server <br>
--------- kube-api-server: need client certificate to authenticate to ETCD-Server <br>
--------- kube-api-server: need client certificate to authenticate to kubelet server <br>
+- - Server certificates: <br>
+- - - kube-api server (controlplan) <br> 
+- - - ETCD server (controlplan) <br>
+- - - kubelet server (worker node) <br>
+- - Client certificates: <br>
+- - - Admin user (need private and public key) <br>
+- - - kube-scheduler: need client certificate to authenticate to API-Server <br>
+- - - kube-controller-manager: need client certificate to authenticate to API-Server <br>
+- - - kube-proxy: need client certificate to authenticate to API-Server <br>
+- - - kube-api-server: need client certificate to authenticate to ETCD-Server <br>
+- - - kube-api-server: need client certificate to authenticate to kubelet server <br>
 
 ---
 ## we need at least one CERTIFICATE AUTHORITY (CA) in the cluster to sign all these certificates
 ---
 - How to generate TLS certificates? <br>
----- "OpenSSL" tool to generate CERTIFICATE AUTHORITY <br>
----- Steps for Server certificates: <br>
+- - Use "OpenSSL" tool to generate CERTIFICATE AUTHORITY <br>
+- - - Steps for Server certificates: <br>
 ---- 1st) Create Private key to using openss command `openssl genrsa -out ca.key 2048` <br>
 ---- 2nd) Generate Certificate Signing Request. Use openssl request command along with the created key  `openssl req -new -key ca.key -subj "/CN=KUBENETES-CA" -out ca.csr` <br>
 ---- 3rd) Sign the Certificates using "x509" command `openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt` <br>
-<br>
+
 ---
----- Steps for Client certificates: <br>
+- - - Steps for Client certificates: <br>
 1st) admin user: <br> 
 ---- a) Create private key using openssl command. `openssl genrsa -out admin.key 2048` <br> 
 ---- b) Create CSR (Certificate Signing Request) [kube-admin is very important] `openssl req -new -key admin.key -subj "/CN=kube-admin" -out admin` <br> 
@@ -69,6 +70,9 @@ Decode the certificate `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
 
 ---
 
+
+
+---
 
 - How to configure TLS certificates?
 - How to view TLS certificates?
