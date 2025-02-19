@@ -51,7 +51,7 @@
 - How to generate TLS certificates? <br>
 - - Use "OpenSSL" tool to generate CERTIFICATE AUTHORITY <br>
 - - - Steps for Server certificates: <br>
----- 1st) Create Private key to using openss command `openssl genrsa -out ca.key 2048` <br>
+---- 1st) Create Private key to using openssl command `openssl genrsa -out ca.key 2048` <br>
 ---- 2nd) Generate Certificate Signing Request. Use openssl request command along with the created key  `openssl req -new -key ca.key -subj "/CN=KUBENETES-CA" -out ca.csr` <br>
 ---- 3rd) Sign the Certificates using "x509" command `openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt` <br>
 
