@@ -1,0 +1,25 @@
+# Create a CertificateSigningRequest object with the name akshay with the contents of the akshay.csr file
+#Steps
+# 1. cat akshay.csr | base64 | tr -d '\n'
+# 2. Create a file akshay.yml with the below content
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: akshay
+spec:
+  request: <BASE64_ENCODED_CSR>  # Add result from step 1
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+    - digital signature
+    - key encipherment
+    - client auth
+
+# 3. kubectl apply -f akshay.yml
+# 4. Approve the CSR (Optional) `kubectl certificate approve akshay`
+
+# 5 To check the status (conditions) of the CertificateSigningRequest (CSR) in Kubernetes, use the following command: "kubectl get csr akshay -o yaml"
+# 6 To check the certificate, use the following command: "kubectl get csr akshay -o jsonpath='{.status.certificate}' | base64 -d | openssl x509 -noout -text"
+# 7 To check how many CertificateSigningRequest (CSR) objects are on the cluster, use the following command: "kubectl get csr"
+# 8 To see detail about a certificate signing request, use the following command: "kubectl get csr agent-smith -o yaml > agent-smith.yaml" 
+# 9 To reject a certificate signing request, use the following command: "kubectl certificate deny agent-smith"
+# 10 To delete a certificate signing request, use the following command: "kubectl delete csr agent-smith"
