@@ -1,0 +1,19 @@
+## Sample structure of Gitlab CICD
+run_tests:
+  before_script:
+    - echo "Preparing test data..."
+  script:
+    - echo "Running tests ...."
+  after_script:
+    - echo "Cleaning up temp files..."
+
+build_image:
+  script:
+    - echo "Building the docker image ...."
+    - echo "Tagging the docker image"
+
+
+push_image:
+  script:
+    - echo "Logging into docker registry...."
+    - echo "Pushing docker image to registry...."
