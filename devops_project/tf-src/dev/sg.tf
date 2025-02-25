@@ -17,8 +17,8 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"] # Acesse via SSH de qualquer lugar
   }
   ingress {
-    from_port   = 31000
-    to_port     = 31000
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Acesse vault ui
   }
