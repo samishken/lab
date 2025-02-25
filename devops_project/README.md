@@ -24,4 +24,6 @@
 - - `df -h`
 
 #### docker compose
-- `docker compose up -d`
+- `docker-compose build`
+- `docker-compose up -d`
+- Implement Docker lifecycle
