@@ -1,0 +1,23 @@
+# Role binding connects a user or group to a set of permissions, called a role. 
+# Role bindings are used to control access to resources in a cluster.  
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devuser-developer-binding
+  namespace: default
+subjects:
+- kind: User
+  name: dev-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef: # details of the role to bind to the user
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+
+# kubectl create -f devuser-developer-binding.yml
+# kubectl get rolebinding devuser-developer-binding -o yaml
+# kubectl get role developer -o yaml
+# kubectl describe role developer
+# kubectl describe rolebinding devuser-developer-binding
+
+

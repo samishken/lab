@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer-role
+  namespace: blue # works for default namespace too
+rules:
+- apiGroups: [""] # leave empty to specify the core API group
+  resources: ["pods"]
+  verbs: ["get", "list", "create", "update", "watch", "delete"]
+  resourceNames: ["my-pod", "blue-pod", "dark-blue-pod"] # restrict to a specific pod by name
+- apiGroups: [""] # leave empty to specify the core API group:
+  resources: ["ConfigMap"]
+  verbs: ["create"]
+
+
+# kubectl create -f developer-role.yml
+# Link user to the role - refer to role binding

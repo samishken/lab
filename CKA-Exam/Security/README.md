@@ -81,10 +81,72 @@ Decode the certificate `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
 --- 
 
 
-
-
-
 ### Authorization
+- Admins have access to the cluster
+- once Users get access to the cluster, what can they do?
+#### Node Authorization
+- - Node Authorizer: 
+- - Any requests coming from a user with the name system node and part of the system nodes group is authorized by the node authorizers
+#### ABAC (Attribute-based authorization) - difficult to manage
+- - Associate a user or group of users with a set of permissions
+- - Policy file example:
+        ```
+        {"king": "Policy"
+        "spec": {
+            "user: "dev-user", 
+            "namespace": "*", 
+            "resource": "pods", 
+            "apiGroup": "*"
+        }}
+        ```
+- - Everytime we want to add or make a change in security policy file, we must edit the policy file manually and restart the QB-API server. which makes the ABAC difficult to manage.
+
+
+#### RBAC (Role based authorization control) - 
+- - Instead of directly associating a user or group with a set of permissions, we define a role.
+- - Create a role with set of permissions required for developers.
+- - Associate developers to that role.
+- - when change needs to be made to the users access, we simply modify the role and it reflects on all developers immediately.
+- - How to create a role?
+        ```
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: Role
+        metadata:
+            name: developer-role
+        rules:
+        - apiGroups: [""]
+            resources: ["pods"]
+            verbs: ["get", "list", "create", "update", "watch"]
+        ```
+#### Check Access for self and othes
+- - `kubectl auth can-i create deployments`
+- - `kubectl auth can-i delete nodes`
+- - `kubectl auth can-i create deployments` --as dev-user --namespace test
+- - `kubectl auth can-i delete nodes` --as dev-user
+
+#### Webhook authorization
+---
+- AUTHORIZATION MODE
+- - `authorizaiton-mode=AlwaysAllow` DEFAULT
+- - `authorizaiton-mode=Node,RBAC,Webhook`
+- - Authorization happens based on the order listed `Node,RBAC, Webhook`
+- - Example: when a user send a request, it's first handled by the `Node authorizer`. If authorization for `node access` gets denied. It'll go to the next in the list -> `RBAC` performs its checks and grants the user permission. If there's a `RBAC` deny then `Webhook`
+- - 
+
+#### User (Group) Roles  & role binding
+- Namespaced
+
+#### Cluster Roles
+- Cluster Scoped (Nodes, PV, clusterroles, clusterrolebindings, certificatesigningrequests, namespaces)
+- clusterrolebinding
+- - for Cluster Admins, Storage Admins,
+    ```
+    api
+    ```
+
+
+- - 
+
 ### Images Security
 ### Network Policies
 - control access between pods

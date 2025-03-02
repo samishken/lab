@@ -15,8 +15,8 @@
 
 #### EC2
 - Install kubectl, terraform, docker
-- Increase volume size to 30
-- run the following commands
+- Increase volume size to 30GB
+- run the following commands to fix disk size issue
 - - `df -h`
 - - `lsblk`
 - - `sudo growpart /dev/xvda 1`
@@ -24,6 +24,6 @@
 - - `df -h`
 
 #### docker compose
-- `docker-compose build`
-- `docker-compose up -d`
+- `docker compose up`
+- `docker compose up -d`
 - Implement Docker lifecycle
