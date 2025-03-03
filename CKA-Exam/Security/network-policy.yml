@@ -1,4 +1,5 @@
 ---
+# Ingress network policy
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -9,7 +10,6 @@ spec:
       role: db
   policyTypes:
   - Ingress
-  #- Egress
   ingress:
   - from:
     - podSelector:
@@ -18,14 +18,6 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
-  # egress:
-  # - to:
-  #   - podSelector:
-  #       matchLabels:
-  #         app: frontend
-  #   ports:
-  #   - protocol: TCP
-  #     port: 3306
  
   # `kubectl apply -f network-policy.yml`
 ---      
@@ -36,7 +28,7 @@ metadata:
 spec:
     podSelector:
       matchLabels:
-      role: db
+        role: db
     policyTypes:
     - Ingress
     ingress:
@@ -53,6 +45,7 @@ spec:
       - protocol: TCP
         port: 3306
 ---
+# Egress network policy
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -71,3 +64,37 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: internal-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: internal
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+    - {}
+  Egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: mysql
+    ports:
+    - protocol: TCP
+      port: 3306
+  - to:
+    - podSelector:
+        matchLabels:
+          name: payroll
+    ports:
+    - protocol: TCP
+      port: 8080
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
