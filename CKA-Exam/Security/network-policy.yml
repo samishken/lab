@@ -1,0 +1,73 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  #- Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: api-pod
+    ports:
+    - protocol: TCP
+      port: 3306
+  # egress:
+  # - to:
+  #   - podSelector:
+  #       matchLabels:
+  #         app: frontend
+  #   ports:
+  #   - protocol: TCP
+  #     port: 3306
+ 
+  # `kubectl apply -f network-policy.yml`
+---      
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: db-policy
+spec:
+    podSelector:
+      matchLabels:
+      role: db
+    policyTypes:
+    - Ingress
+    ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            name: api-pod
+        namespaceSelector:
+          matchLabels:
+              name: prod
+      - ipBlock: # allow traffic from specific IP CIDR
+          cidr: 192.168.5.10/32
+      ports:
+      - protocol: TCP
+        port: 3306
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Egress
+  egress:
+  - to:  # allow traffic to specific pod
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 3306
