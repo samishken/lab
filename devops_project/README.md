@@ -1,5 +1,7 @@
 # DevOps End-to-End Project
 
+- Clone this to aws (https://github.com/iam-veeramalla/ultimate-devops-project-demo)
+- Notes - https://github.com/iam-veeramalla/ultimate-devops-project-aws
 #### IAM 
 - Creates users, usergroups, roles, policies
 - RBAC
