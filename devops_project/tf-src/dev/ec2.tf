@@ -28,7 +28,7 @@ resource "aws_instance" "devops-project" {
 
   # ToDO: Add user_data to install docker, terraform, ansible, kubectl
   # user_data = <<-EOF
-  #         EOF
+  #              EOF
 
   tags = {
     Name = "devops-project"

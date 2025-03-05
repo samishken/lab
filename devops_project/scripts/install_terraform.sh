@@ -10,6 +10,7 @@ sudo apt update
 
 
 # Install Terraform
-sudo apt-get install terraform
-# Verify Terraform Installation
-terraform -help
+sudo apt-get install terraform -y
+
+# Install go
+sudo apt install golang-go -y
