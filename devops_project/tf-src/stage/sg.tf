@@ -1,7 +1,7 @@
 resource "aws_security_group" "ec2_sg" {
   name        = "devops-project-sg"
   description = "allow-ssh"
-  vpc_id      = aws_vpc.vpc.id
+  #vpc_id      = aws_vpc.vpc.id
 
   egress {
     from_port        = 0

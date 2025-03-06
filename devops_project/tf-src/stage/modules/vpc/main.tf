@@ -1,4 +1,4 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -11,7 +11,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "private" {
   count             = length(var.private_subnet_cidrs)
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.private_subnet_cidrs[count.index]
   availability_zone = var.availability_zones[count.index]
 
@@ -22,9 +22,9 @@ resource "aws_subnet" "private" {
   }
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "pub_sub1" {
   count             = length(var.public_subnet_cidrs)
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.public_subnet_cidrs[count.index]
   availability_zone = var.availability_zones[count.index]
 
@@ -38,7 +38,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
     Name = "${var.cluster_name}-igw"
@@ -57,7 +57,7 @@ resource "aws_eip" "nat" {
 resource "aws_nat_gateway" "main" {
   count         = length(var.public_subnet_cidrs)
   allocation_id = aws_eip.nat[count.index].id
-  subnet_id     = aws_subnet.public[count.index].id
+  subnet_id     = aws_subnet.pub_sub1[count.index].id
 
   tags = {
     Name = "${var.cluster_name}-nat-${count.index + 1}"
@@ -65,7 +65,7 @@ resource "aws_nat_gateway" "main" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -79,7 +79,7 @@ resource "aws_route_table" "public" {
 
 resource "aws_route_table" "private" {
   count  = length(var.private_subnet_cidrs)
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block     = "0.0.0.0/0"
@@ -99,6 +99,6 @@ resource "aws_route_table_association" "private" {
 
 resource "aws_route_table_association" "public" {
   count          = length(var.public_subnet_cidrs)
-  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.pub_sub1[count.index].id
   route_table_id = aws_route_table.public.id
 }
