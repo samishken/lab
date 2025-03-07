@@ -152,8 +152,7 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 
 
 ### Variables
-- Extra vars: highest priorit than Host vars, Group vars
-- Host variable has more power than Group variable
+
 - "Jinja2 templating:  '{{ snmp_port}}'
 - Stores information that varies with each host
 - host name, usernames
@@ -165,9 +164,45 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 - - List variables: hold an ordered collection of values.
 - - Dictionary variables: hold key value pairs.  name = "adam"
 
+- Registering Variables & Varaible Precedence
+- - [web_servers;vars]  dns_server=10.5.5.3
+- Extra vars: highest priorit than Play vars, Host vars, Group vars
+- - - - Play vars has higher power than Host var, Group vars
+- - - - - - Host variable has more power than Group variable
 
+---
+(Register Output Scope)
+- name: Check /etc/hosts file
+  hosts: all
+  tasks:
+  - shell:  cat /etc/hosts
+    register: result <--> (returns resutls)
+  - debug:
+      var: result  <--> uses the retuned results
 
-
+- ansible_facts: gather information about the target server (hosts) that are on the playbook only.
+- gathering: by default is set to implicit
 
 
 ### Playbooks
+- set of instruction (play) to run Ansible
+- Task: single action to be performed
+- hosts: 
+- tasks:
+- Verify Ansible Playbook: checking errors before deploying to systems & causing big mistakes.
+- - - - check mode: "dry run" ansible runs without making any changes
+- - - - - - - - - run "ansible-playbook filename.yml --check"
+- - - - diff mode: show what changes a play book makes
+- - - - - - - - - run "ansible-playbook filename.yml --diff"
+- - - - - - - - - run "ansible-playbook filename.yml --check --diff"
+- - - - Syntax Check: Ensures playbook syntax is error-free
+- - - - - - - - - run "ansible-playbook filename.yml --syntax-check"
+- Ansible Lint - gives us issues with our yaml code
+- - - - "ansible-lint filename.yml"
+
+
+
+
+### Ansible Modules
+### Ansible Handlers, Roles, Collection
+### Ansible Templates
