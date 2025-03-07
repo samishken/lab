@@ -1,0 +1,26 @@
+---
+-  name: 'Print list of fruits'
+   hosts: localhost
+   vars:
+     fruits:
+       - Apple
+       - Banana
+       - Grapes
+       - Orange
+   tasks:
+     - command: 'echo "{{ item }}"'
+       with_items: '{{ fruits }}'
+---
+- name: 'Install required packages'
+  hosts: localhost
+  become: yes
+  vars:
+    packages:
+      - httpd
+      - make
+      - vim
+  tasks:
+    - yum:
+        name: vim
+        state: present
+      with_items: '{{ packages }}'

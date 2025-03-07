@@ -193,10 +193,41 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 - - - - - - - - - run "ansible-playbook filename.yml --syntax-check"
 - Ansible Lint - gives us issues with our yaml code
 - - - - "ansible-lint filename.yml"
+---
 - Conditionals statement: when a condition is true -> run
 - - "when" a condtion "==" another condition -> run
 - - `when item.required == true`
 - - `ansible_os_family` Ansible built-in variable populates the flavour of the operating system
+
+---
+- LOOPS - there are many **With_** (with_items, with_file, with_url)
+        ```
+        tasks:
+        - user: name='{{ item }}' state=present
+            loop:   (or with_items:)
+            - joe
+            - george
+            - ravi
+            - mani
+            - kiran
+        ```
+
+        ```
+        tasks:
+        - user: name='{{ item.name }}' uid='{{ item.uid }}'state=present
+            loop:  (or with_items:)
+            - name: joe
+                uid: 1010
+            - george
+                uid: 1011
+            - name: ravi
+                uid: 1012
+            - name: mani
+                uid: 1013
+            - name: kiran
+                uid: 1014
+        ```
+
 
 
 
