@@ -10,7 +10,7 @@
       service:
         name: httpd
         state: started
-
+---
 - name: Setup tomcat
   hosts: appserver
   tasks:

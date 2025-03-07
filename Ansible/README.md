@@ -68,7 +68,6 @@
                 ```
 
 In this lab exercise you will use below hosts. Please note down some details about these hosts as given below :
-
 student-node :- This host will act as an Ansible master node where you will create playbooks, inventory, roles etc and you will be running your playbooks from this host itself.
 
 node01 :- This host will act as an Ansible client/remote host where you will setup/install some stuff using Ansible playbooks. Below are the SSH credentials for this host:
@@ -78,6 +77,9 @@ Password: caleston123
 node02 :- This host will also act as an Ansible client/remote host where you will setup/install some stuff using Ansible playbooks. Below are the SSH credentials for this host:
 User: bob
 Password: caleston123
+
+
+Note: Please type exit or logout on the terminal or press CTRL + d to log out from a specific
 
 ### Inventory
 - /etc/ansible/hosts
@@ -232,5 +234,23 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 
 
 ### Ansible Modules
+- Ansible Modules are categorized into various groups based on their functionality.
+- - System: Actions to be perfomred at a system level. (modifying users, groups, hostname)
+- - Commands (script, shell)
+- - Files (archive, copy, file, find)
+- - Database (mongodb, mssql)
+- - Cloud (aws, azure, gcp, docker)
+- - Windows ()
+##### Idempotency: An operation is idempotent if the result of performing it once is exactly the same as the result of perfomring it repeatedly without any intervening actions.
+- start: start httpd
+- started: if httpd is already started = do nothing,  if not start it.
+<br>
+- Ansible Plugins: 
+- lineinfile
+
 ### Ansible Handlers, Roles, Collection
+- Handlers: we can define an action to restart a service and associate it with a task that modifies the configuration file.  This creates a dependency between that task and the handler. 
+- - - - - - Whenever the configuration file is modfied during the playbook run, the associated handler is triggered ensuring that the service is automatically restarted.
+- Roles: we assign roles to blank servers to make them for example, database server, web-server or backup server.  Installing prerequisites required to make server database or web or backup server.
+- - - - - - 
 ### Ansible Templates
