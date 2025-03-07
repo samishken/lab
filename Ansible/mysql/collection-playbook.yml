@@ -1,0 +1,13 @@
+---
+# we've installed the amazon.aws collection and now we need to create an EC2 instance using a playbook.
+- hosts: localhost
+  collections:
+    - amazon.aws
+  tasks:
+    - name: Launch an EC2 instance
+      ec2_instance:
+        name: my-instance
+        region: us-west-1
+
+# Run the playbook
+#ansible-galaxy collection install -r collections-playbook.yml
