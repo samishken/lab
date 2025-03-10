@@ -245,4 +245,8 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 - - - - - - `ansible-galaxy init mysql`
 - - - - - - roles path
 - Ansible collection: ansible collections are a way to package and distribute ansible content, including modules, roles, plugins and other related assets. 
+- 
 ### Ansible Templates
+- Jinja2: templating engine
+- Templating: A templating engine is responsible for taking a template and applying a given set of variables to it ... to create usable outputs.  It can create one resource or 100 resources as we desired.
+- {{ "/etc/hosts" | basename }} => hosts
