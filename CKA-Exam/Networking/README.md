@@ -32,6 +32,8 @@
 - - `ip address show type bridge`
 - - kube-scheduler port listening on `netstat -npl | grep -i scheduler -n`
 - - To Inspect the kubelet service and identify the container runtime endpoint value is set for k8s `ps -aux | grep -i kubelet`
+- - To get POD IP address range configured by plugin (weave): ``
+- - 
 
 ### DNS
 ##### DNS Configurations on host (Linux)
