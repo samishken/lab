@@ -50,6 +50,13 @@
 - - (maps.google.com), apps.google.com, mail.google.com
 - - `nslookup google.com`
 - - `dig www.google.com`
+- - find configuration file located for configuring the DNS service: Describe the pod (Spec -> Container)
+- - - - 
+
+- - - - Service DNS records
+
+- - - - POD DNS Records
+
 
 ##### CoreDNS Introduction
 - -
@@ -108,4 +115,24 @@
 - Every POD should be able to communicate with every other POD in the same node
 - Every POD should be able to communicate with every other POD on other nodes without NAT.
 - Bridge network: 
-- 
+
+##### Service Networking
+- Unlike pods services are not created on each node or assigned to each node.
+- IP addresses
+- When a service is created it is accesible from all pods of the cluster, irrespective of what nodes the pods are on. Only within the cluster.
+- - - - Kubelet
+- 1) kubelet service which is responsible for creating pods is on all nodes.
+- 2) kubelet ensures that pods are created on the nodes.
+- 3) kubelet then invokes CNI plugin to configure networking for the PODs.
+- - - - Kube-proxy
+- We are using "daemonset" to deploy "kube-proxy"
+- 1) Each nodes runs kube-proxy.  
+- 2) Kube-proxy watches the changes in the cluster through kube-api server, and every time a new service is to be created, kube-proxy gets into action.
+- `ps aux | grep kube-api-server`  to see range ip address
+- `cat /var/log/kube-proxy.log`
+- ***** To see the range of IP addresses configured for PODs on the cluster: 
+- - - - `kubectl logs weave-net -n kube-system` : look into this log
+- ***** To see the IP range configured within the cluser:
+- - - - `cat /etc/kubernetes/manifests/kube-api-server`  look for line "service-cluster-ip-range"
+- ***** To see the type of kube-proxy pods configured:
+- - - - run logs of the kube-proxy pod from kube-system namespace.

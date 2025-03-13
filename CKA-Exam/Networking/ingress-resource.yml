@@ -1,0 +1,80 @@
+# Using path
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: critical-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /pay
+        pathType: Prefix
+        backend:
+          service:
+           name: pay-service
+           port:
+            number: 8282
+--- 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: app-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /watch
+        pathType: Prefix
+        backend:
+          service:
+           name: video-service
+           port:
+            number: 8080
+      - path: /wear
+        pathType: Prefix
+        backend:
+          service:
+            name: wear-service
+            port:
+              number: 8080
+
+--- 
+# using domain name
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-weat
+spec:
+  rules:
+  - host: wear.my-onlineshop.com  #domain name for ingress
+    http:
+      paths:
+      - backend:
+          serviceName: wear-service
+          servicePort: 80
+  - host: watch.my-onlineshop.com
+    http:
+      paths:  
+      - backend:
+          serviceName: watch-service
+          servicePort: 80 
+
+# Format - kubectl create ingress  --rule="host/path=service:port"**
+# kubectl create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"**
+# kubectl apply -f Networking/ingress-resource.yml
+# kubectl get ingress
+# kubectl describe ingress ingress-weat
+# kubectl get ingress ingress-weat -o yaml
+# kubectl get ingress ingress-weat -o json
+# kubectl get ingress ingress-weat -o wide
+# kubectl get ingress ingress-weat -o custom-columns=NAME:.metadata.name,HOSTS:.spec.rules[*].host,ADDRESS:.status.loadBalancer.ingress[*].ip
+# kubectl get ingress ingress-weat -o custom-columns=NAME:.metadata.name,HOSTS:.spec.rules[*].host,ADDRESS:.status.loadBalancer.ingress[*].hostname
