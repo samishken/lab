@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2_sg" {
-  name        = "devops-project-sg"
+  name        = "devops-project-preprod-sg"
   description = "allow-ssh"
   vpc_id      = aws_vpc.vpc.id
 

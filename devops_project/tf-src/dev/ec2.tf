@@ -19,11 +19,11 @@ resource "aws_instance" "devops-project" {
   instance_type          = "t2.large"
   key_name               = "dev-account-lenovo"
   #subnet_id              = aws_subnet.pub_sub1.id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.ec2_sg_dev.id]
 
   root_block_device {
     volume_type = "gp3"
-    volume_size = 20 # Size in GB
+    volume_size = 30 # Size in GB
   }
 
   # ToDO: Add user_data to install docker, terraform, ansible, kubectl
@@ -31,6 +31,6 @@ resource "aws_instance" "devops-project" {
   #              EOF
 
   tags = {
-    Name = "devops-project-stage"
+    Name = "devops-project-dev"
   }
 }

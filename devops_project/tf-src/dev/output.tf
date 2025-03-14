@@ -1,5 +1,5 @@
 output "security_group_public" {
-  value = aws_security_group.ec2_sg.id
+  value = aws_security_group.ec2_sg_dev.id
 }
 
 output "public-subnet1" {
@@ -10,7 +10,7 @@ output "public-subnet2" {
 }
 
 output "vpcid" {
-  value = aws_vpc.vpc.id
+  value = aws_vpc.vpc_dev
 }
 
 output "instance_public_ip" {

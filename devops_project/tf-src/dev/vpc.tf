@@ -1,16 +1,16 @@
-resource "aws_vpc" "vpc" {
+resource "aws_vpc" "vpc_dev" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "devops-project-vpc"
+    Name = "devops-project-vpc-dev"
   }
 }
 
 resource "aws_internet_gateway" "my_igw" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.vpc_dev.id
 
   tags = {
-    Name = "devops-project-igw"
+    Name = "devops-project-igw-dev"
   }
 }
 # resource "aws_internet_gateway" "igw" {
@@ -21,25 +21,25 @@ resource "aws_subnet" "pub_sub1" {
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = "true"
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.vpc_dev.id
   tags = {
-    Name = "DevOps-Project-pub_sub1"
+    Name = "DevOps-Project-pub_sub1-dev"
   }
 }
 
 resource "aws_subnet" "pub_sub2" {
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "us-east-1c"
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.vpc_dev.id
   map_public_ip_on_launch = "true"
   tags = {
-    Name = "DevOps-Project-pub_sub2"
+    Name = "DevOps-Project-pub_sub2-dev"
   }
 }
 
 
 resource "aws_route_table" "pub_rt" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.vpc_dev.id
 }
 
 

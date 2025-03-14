@@ -19,7 +19,7 @@ provider "aws" {
   region = var.region
 }
 
-module "vpc" {
+module "vpc_stage" {
   source = "./modules/vpc"
 
   vpc_cidr             = var.vpc_cidr
@@ -34,7 +34,7 @@ module "eks" {
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
-  vpc_id          = module.vpc.vpc_id
-  subnet_ids      = module.vpc.private_subnet_ids
+  vpc_id          = module.vpc_stage.vpc_id
+  subnet_ids      = module.vpc_stage.private_subnet_ids
   node_groups     = var.node_groups
 }

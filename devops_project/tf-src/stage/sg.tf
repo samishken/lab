@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2_sg" {
-  name        = "devops-project-sg"
+  name        = "devops-project-stage-sg"
   description = "allow-ssh"
   #vpc_id      = aws_vpc.vpc.id
 
@@ -21,6 +21,9 @@ resource "aws_security_group" "ec2_sg" {
     to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Acesse vault ui
+  }
+  tags = {
+    Name = "devops-project-stage-sg"
   }
 }
 

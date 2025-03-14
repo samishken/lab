@@ -1,7 +1,7 @@
-resource "aws_security_group" "ec2_sg" {
-  name        = "devops-project-prod-sg"
+resource "aws_security_group" "ec2_sg_dev" {
+  name        = "devops-project-dev-sg"
   description = "allow-ssh"
-  vpc_id      = aws_vpc.vpc.id
+  #vpc_id      = aws_vpc.vpc.id
 
   egress {
     from_port        = 0
@@ -17,8 +17,8 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"] # Acesse via SSH de qualquer lugar
   }
   ingress {
-    from_port   = 31000
-    to_port     = 31000
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Acesse vault ui
   }
