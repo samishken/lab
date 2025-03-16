@@ -43,3 +43,14 @@
 - Service discovery
 
 # Ingress
+- why use Ingress than ALB (using Service type Loadbalancer disadvantages)
+- 1) It's not declarative
+- 2) Cost: if we have more than 1 microservice that need outside access, then we need a lot of LBs which is expensive.
+- 3) We will be tied to ALB only. We won't have the flexibility to use other loadbalancers like nginx, F5, Traffik
+- 4) Loadbalancer only works on public cloud service
+
+ ##### ingress advantages
+ - 1) Declarative.  we can use yaml file to create it.
+ - 2) cost effective. One LBs with host or route based routing is enough for multiple microservices
+ - 3) Flexible: flexible to use multiple load balancer tools. can be used on Minikube
+ - 4) Not CCM dependent: not dependent on public cloud services (aws, gcp, azure)
