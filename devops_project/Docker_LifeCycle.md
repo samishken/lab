@@ -22,6 +22,9 @@
 # kubernetes Service Account
 - user account vs Service account
 - Roles -> Rolebinding -> Service account
+- How do we connect one service with another?
+- - - - If Microservice_A needs to connect to Microservice_B, in the environment of Microservice_A POD, we add Service name of Microservice_B
+- - - - We can also use ConfigMaps to connect two microservices.
 
 # kubernetes deployment
 - Deployment resource provides high availablity
