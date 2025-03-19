@@ -2,6 +2,13 @@
 
 - Clone this to aws (https://github.com/iam-veeramalla/ultimate-devops-project-demo)
 - Notes - https://github.com/iam-veeramalla/ultimate-devops-project-aws
+
+Steps to start this project:
+1) deploy infra using terraform (run necessary scripts) <br>
+2) deploy service account <br>
+3) deploy deployment manifest files <br>
+4) deploy ALB Ingress controller <br>
+
 #### IAM 
 - Creates users, usergroups, roles, policies
 - RBAC
