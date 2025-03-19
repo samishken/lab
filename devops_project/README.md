@@ -5,9 +5,14 @@
 
 Steps to start this project:
 1) deploy infra using terraform (run necessary scripts) <br>
-2) deploy service account <br>
+2) deploy service account <br> 
 3) deploy deployment manifest files <br>
 4) deploy ALB Ingress controller <br>
+- - setup IAM OIDC provider: connects pods inside the cluster to elastic loadbalancer which are outside the cluster
+- - Deploy ingress
+5) setup route53
+6) create CICD to deploy the application.
+7) ArgoCD
 
 #### IAM 
 - Creates users, usergroups, roles, policies

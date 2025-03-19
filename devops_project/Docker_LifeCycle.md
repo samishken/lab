@@ -64,4 +64,5 @@
  -- Ingress controller: when you create a Kubernetes resource of type ingress, nothing happens.  Only when this ingress is read by the ingress controller which is a Kubernetes controller. Ingress controller reads that YAML file understands what is the exact requirement and it creates load balancer accordingly.
  -- if we keep the service type as ClusterIP or NodePort, and if we use Ingress resource using yaml for a microservice, Ingress controller reads that YAML file and according to the rules defined in the ingress file, it creates the load balancer.
 
- 
+ # sudo vi /etc/hosts
+ - ingress: url and ip address
