@@ -1,5 +1,8 @@
 # Python
 
+### when to use python vs shell scripting?
+- 
+
 ### Python functions
 ##### built-in functions
 - print: writes text on the screen
