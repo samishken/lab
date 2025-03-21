@@ -1,0 +1,14 @@
+---
+- name: ansible facts in playbook
+  hosts: localhost
+  tasks:
+    - debug:
+        var: ansible_facts 
+
+--- 
+- name: set not to gather facts by default
+  hosts: localhost
+  gather_facts: no  # true to gather facts, false to not gather facts by default
+  tasks:
+    - debug:
+        var: ansible_facts

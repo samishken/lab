@@ -250,3 +250,12 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 - Jinja2: templating engine
 - Templating: A templating engine is responsible for taking a template and applying a given set of variables to it ... to create usable outputs.  It can create one resource or 100 resources as we desired.
 - {{ "/etc/hosts" | basename }} => hosts
+
+
+### Facts in Ansible
+- Facts are gathered for the targeted hosts ONLY
+- Facts are when we run a playbook and when Ansible connects to a target machine, it first collects information about the machine, such as its basic system information, like system architecutre, version of OS, process details, memory details, serial numbers, host network connectivit, IP addresses, etc...
+- SETUP MODULE: is run automatically by Ansible to gather facts about the host when we run playbook.
+- Facts gathered are stored ina variable named "ansible_facts".
+
+
