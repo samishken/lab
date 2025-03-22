@@ -12,3 +12,9 @@ Custom location
 - `ansible-config dump` # shows the current settings
 - `$ export ANSIBLE_GATHERING=explicit`
 - `$ ansible-config dump | grep GATHERING`  # DEFAULT_GATHERING(env: ANSIBLE_GATHERING) = explicit
+
+--- 
+- ssh-keygen -t ed25519 -C "my-work-key" / ssh-keygen -t rsa -f ~/.ssh/ansible
+- ssh (cat ~/.ssh/authorized_keys)
+- Inventory 
+- `web1 ansible_host=172.20.1.100 ansible_user=ansible ansible_ssh_private_key_file=~/.ssh/ansible`

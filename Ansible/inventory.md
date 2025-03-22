@@ -1,0 +1,1 @@
+web1 ansible_host=172.20.1.100 ansible_user=ansible ansible_ssh_private_key_file=~/.ssh/ansible
