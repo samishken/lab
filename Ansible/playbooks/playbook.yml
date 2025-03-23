@@ -1,0 +1,9 @@
+# Create and run a playbook ~/playbooks/playbook.yml to cat the file /etc/redhat-release on
+# all managed nodes in the inventory file ~/playbooks/inventory. 
+
+---
+- name: display redhat release
+  hosts: all
+  tasks:
+    - shell: cat /etc/redhat-release
+
