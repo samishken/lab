@@ -8,9 +8,8 @@
     - command: 'echo "My car is {{ car_model}}"'
     - command: 'echo "I live in the {{ country_name }}"'
     - command: 'echo "I work as a {{ title }}"'
-
----
-- hosts: all
+- name: Test Handler Execution
+  hosts: all
   become: yes
   tasks:
     - name: Set up user
@@ -21,14 +20,15 @@
         state: present
 
 # Inventory file
---- 
-localhost ansible_connection=local nameserver_ip=8.8.8.8 snmp_port=160-161
-node01 ansible_host=node01 ansible_ssh_pass=caleston123
-node02 ansible_host=node02 ansible_ssh_pass=caleston123
-[web_nodes]
-node01
-node02
 
-[all:vars]
-app_list=['vim', 'sqlite', 'jq']
-user_details={'username': 'admin', 'password': 'secret_pass', 'email': 'admin@example.com'}
+# localhost ansible_connection=local nameserver_ip=8.8.8.8 snmp_port=160-161
+# node01 ansible_host=node01 ansible_ssh_pass=caleston123
+# node02 ansible_host=node02 ansible_ssh_pass=caleston123
+# [web_nodes]
+# node01
+# node02
+
+# [all:vars]
+# app_list=['vim', 'sqlite', 'jq']
+# user_details={'username': 'admin', 'password': 'secret_pass', 'email': 'admin@example.com'}
+

@@ -1,0 +1,101 @@
+# TasK 1: install firewalld on web1 node
+# Task 2: ensure firewalld service is started and should always start even after the system reboots.
+- hosts: web1
+  tasks:
+   - name: install firewalled
+     yum:
+       name: firewalld
+       state: installed
+   - name: state firewalled
+     service:
+       name: firewalld
+       state: started
+
+ # white list web2 node's IP address 172.20.1.101 in firewall. 
+- name: white list ip add
+  hosts: web1
+  tasks:
+    - name: Add rule to firewalld
+      firewalld:
+        enable: https
+        source: 172.20.1.101
+        state: enabled
+        zone: internal
+        permanent: yes
+        immediate: yes
+# block 161/udp port for all the nodes in the internal zone.
+- name: block port
+  hosts: all
+  tasks:
+    - name: block port 161/udp
+      firewalld:
+        port: 161/udp
+        state: enabled
+        zone: internal
+        permanent: yes
+        immediate: yes
+
+# Task 1: enable https connection from Ansible controller machine and 
+# Task 2: make sure that rule must persist even after system reboot. 
+# IP address of ansible controller is 172.20.1.2.
+- name: enable https
+  hosts: web1
+  tasks:
+    - name: add firewall source rule
+      firewalld:
+        source: 172.20.1.2
+        state: enabled
+        zone: internal
+        permanent: yes
+        immediate: yes
+    - name: add https
+      firewalld:
+        zone: internal
+        service: https
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Reload firewalld to apply changes
+      command: firewall-cmd --reload
+
+# Task 1: Add an entry in ~/playbooks/inventory for web2 node, IP address of web2 node is 172.20.1.101 and ssh password and username are same as of web1 (username = root and password = Passw0rd).
+- web1 ansible_host=172.20.1.100 ansible_ssh_pass=Passw0rd ansible_user=root
+- web2 ansible_host=172.20.1.101 ansible_ssh_pass=Passw0rd ansible_user=root
+# Task 2: Update web2-config.yml to install httpd before updating its port in config, also start/enable its service.
+# Task 3: Install firewalld package and start/enable its service.
+# Task 4: add firewall rule in public zone so that Apache can allow all incoming traffic.
+- hosts: web2
+  tasks:
+    - name: Install pkgs
+      yum:
+        name: httpd, firewalld
+        state: present
+
+    - name: Start/Enable services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items:
+        - httpd
+        - firewalld
+
+    - name: Change Apache port
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^(Listen)\s+80\s*$'
+        replace: "Listen 8082"
+
+    - name: restart Apache
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Add firewall rule for Apache
+      firewalld:
+        port: 8082/tcp
+        zone: public
+        permanent: yes
+        state: enabled
+        immediate: true

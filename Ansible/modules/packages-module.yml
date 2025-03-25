@@ -1,0 +1,55 @@
+# install rpm on web1 node using yum module.
+- name: install wget
+  hosts: web1
+  tasks:
+    - yum:
+        name: https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/wget-1.21.1-8.el9.x86_64.rpm
+        state: present
+
+# unzip specific version of a package on all nodes using yum module.
+- name: unzip package
+  hosts: all
+  tasks:
+    - name: Install unzip package
+      yum:
+        name: unzip-5.52
+        state: present
+
+# install iotoop on all nodes using yum module.
+- name: install iotop
+  hosts: all
+  tasks:
+    - name: Install iotop package
+      yum:
+        name: iotop
+        # version: latest # unsupport parameter
+        state: present
+
+# install multiple packages on all nodes using yum module.
+- name: install multiple packages
+  hosts: all
+  tasks:
+    - name: uninstall vsftpd-3.0.5 
+      yum:
+        name: vsftpd vsftpd-3.0.3-33.el8.x86_64
+        state: absent
+    - name: Install multiple packages
+      yum:
+        name:
+          - wget
+          - unzip
+          - iotop
+          - vsftpd vsftpd-3.0.3-33.el8.x86_64
+        state: present
+
+
+# uninstall vsftpd v3.0.5, install vsftpd v3.0.3, and latest version of sudo package 
+- hosts: web1
+  tasks:
+  - yum:
+      name: sudo
+      state: latest
+  - yum:
+      name: vsftpd-3.0.3
+      state: present
+      allow_downgrade: yes

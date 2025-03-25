@@ -1,0 +1,77 @@
+# create file perm.txt, permission 0640,
+- name: create file
+  hosts: all
+  tasks:
+    - name: create file1.conf
+      file: 
+        state: touch
+        path: /opt/data/perm.txt 
+        mode: 0640
+        content: "This is a file with permission 0640"
+
+# create file and add content create file
+- name: create file
+  hosts: all
+  tasks:
+    - name: create perm.txt
+      file: 
+        state: touch
+        path: /opt/data/perm.txt 
+        content: "This is a file with permission 0640"
+
+# add line in file 
+- name: Create a file with content using Ansible
+  hosts: web1
+  become: yes
+  tasks:
+    - name: Create a file with specific content
+      lineinfile:
+        create: yes
+        path: /var/www/html/index.html
+        line:
+          This line was added using Ansible lineinfile module
+
+# recursively finds files in /opt/data directory older than 2 minutes and equal or greater than 1 megabyte in size
+# copies those files under /opt directory. 
+- hosts: web1
+  tasks:
+    - name: Find files
+      find:
+        paths: /opt/data
+        recurse: yes
+      register: file
+
+    - name: Copy files
+      command: "cp {{ item.path }} /opt"
+      with_items: "{{ file.files }}"
+
+
+
+# Task 1: add blockinfile 
+# Add owner group
+- name: Add block to index.html
+  hosts: web1
+  tasks:
+   - blockinfile:
+      owner: apache
+      group: apache
+      insertbefore: BOF
+      path: /var/www/html/index.html
+      block: |
+       Welcome to KodeKloud!
+       This is Ansible Lab.
+
+
+# task 1: change port 80 to 8080 in /etc/httpd/conf/httpd.conf file using replace module
+# task 2: ensure sure Ansible restarts httpd service after making the change.
+
+- name: name
+  hosts: web1
+  tasks:
+  - replace:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^(Listen)\s+80\s*$'
+      replace: 'Listen 8080'
+  - service:
+      name: httpd
+      state: restarted

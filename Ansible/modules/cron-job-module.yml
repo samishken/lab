@@ -1,0 +1,60 @@
+# add a cron job that clears the /var/log/lastlog file daily at 12:00 AM.
+- name: Schedule cron job to clear lastlog
+  hosts: all
+  tasks:
+   - name: Add cron job to clear /var/log/lastlog at 12 AM daily
+     cron:
+       name: Clear Lasting
+       minute: 0
+       hour: 0
+       job: 'echo "" > /var/log/lastlog'
+
+# runs the script /root/file.sh every 2 hours.
+- name: Schedule cron job to run /root/file.sh every 2 hours
+  hosts: all
+  tasks:
+   - name: Add cron job to execute /root/file.sh every 2 hours
+     cron:
+       name: Free Memory Check
+       minute: "0"
+       hour: "*/2"
+       job: 'sh /root/free.sh'
+
+# remove cron job  
+- name: remove cron
+  hosts: node00
+  tasks:
+   - name: remove check memory
+     cron:
+       name: "Check Memory"
+       state: absent
+
+# add a cron named cleanup that will execute after every reboot and will clean /tmp location.
+- name: run cron job after rebook
+  hosts: node00
+  tasks:
+   - name: run cron job after reboot
+     cron:
+       name: clean up /tmp
+       special_time: reboot
+       job: 'rm -rf /tmp/*'
+
+# Create cron for yum
+# run yum updates regularly.
+# a. Do not add cron directly using crontab instead create a cron file /etc/cron.d/ansible_yum.
+# b. The cron must run on every Sunday at 8:05 am.
+# c. The name of the cron must be yum update.
+# d. Cron should be added for user root. Use command `yum -y update`
+- name: run cron job after rebook
+  hosts: node00
+  gather_facts: no
+  tasks:
+   - name: run crone
+     cron:
+       name: yum update
+       weekday: 0
+       minute: 5
+       hour: 8
+       user: root
+       job: 'yum -y update'
+       cron_file: ansible_yum

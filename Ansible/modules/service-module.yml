@@ -1,0 +1,54 @@
+# start httpd service
+- name: Start httpd
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started 
+        enabled: yes # ensure always start automatically after the system reboots
+
+# After copying the file, ensure httpd server reloads after copying the file, make sure it does not restart the httpd server.
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Copy Apache welcome file
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - service:
+        name: httpd
+        state: reloaded
+        enabled: yes
+
+# Task 1: enable port 443 for httpd on web1 node as we want to run nginx on the default port 80 so port 80 needs to be free. 
+# Task2: Make changes in the playbook so that httpd service restarts after making these change.
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Make changes in Apache config
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: "^Listen 80"
+        replace: "Listen 443"
+
+    - name: Restart Apache
+      service:
+        name: httpd
+        state: restarted
+
+# TasK 1: install nginx on web1 node
+# Task 2: ensure nginx service is started and should always start even after the system reboots.
+- hosts: web1
+  gather_facts: no
+  tasks:
+    - name: Install nginx
+      yum:
+        name: nginx
+        state: present
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes

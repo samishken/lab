@@ -1,0 +1,30 @@
+# create a user named admin with group: admin and uid: 2048
+- hosts: all
+  gather_facts: no
+  tasks:
+    - group:
+        name: 'admin'
+        state: present
+    - user:
+        name: 'admin'
+        uid: 2048
+        group: 'admin'
+
+# create a user, exire date
+- hosts: all
+  gather_facts: no
+  tasks:
+    - user:
+        name: 'neymarsabin'
+        expires: 1704067199
+
+# remove a user
+- hosts: all
+  gather_facts: no
+  tasks:
+    - user:  # user must come first
+        name: 'admin'
+        state: absent
+    - group:
+        name: 'admin'
+        state: absent

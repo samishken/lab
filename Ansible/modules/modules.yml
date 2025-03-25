@@ -1,0 +1,90 @@
+---
+- name: Intall web on Ubuntu
+  hosts: all 
+  tasks:
+    - apt: # package module
+        name: apache2
+        state: installed
+    - service: # service module
+        name: apache2
+        #state: started
+        state: started
+        enabled: yes 
+    - firewalld: # firewalld module
+        port: 8080/tcp
+        service: http
+        source: 192.0.0.0/24
+        zone: public
+        permanent: yes
+        state: enabled
+        immediate: yes
+    - lvg: # lvg module
+        vg: vg1
+        pvs: /dev/sdb
+        state: present
+    - filesystem: # filesystem module
+        fstype: xfs
+        dev: /dev/vg1/lv1
+        state: present
+    - mount: # mount module   
+        fstype: xfs
+        src: /dev/vg1/lv1
+    - file: # file module
+        path: ~/playbooks/inventory.
+        state: touch
+    - archive: # archive module
+        path: /opt/app/web
+        dest: /tmp/web.gz
+        format: gz|zip|tar
+    - unarchive:
+        src: /tmp/web.gz
+        dest: /opt/app/web
+    - command: # command module
+        cmd: echo "Hello World"
+    - shell: # shell module
+        cmd: echo "Hello World"
+    - script: # script module
+        src: /tmp/script.sh
+    - debug: # debug module
+        msg: "Hello World"
+    - block: # block module
+        - name: Task 1
+          command: echo "Task 1"
+        - name: Task 2
+          command: echo "Task 2"
+    - include: # include module
+        file: /tmp/tasks.yml
+    - meta: # meta module
+        flush_handlers: yes
+    - cron: # cron module
+        name: "daily backup"
+        month: 2
+        day: 19
+        minute: 0
+        hour: 2
+        weekday: 1 # Monday
+        job: /usr/bin/backup.sh
+    - user: # user module
+        name: admin
+        state: present
+        group: admin
+        groups: sudo
+        append: yes
+        expires: 2022-12-31
+        username: admin
+        password: $6$rounds=656000$J9vz7Q7z7z7z7z7z$
+        shell: /bin/bash
+        home: /home/admin
+
+    - group: # group module
+        name: admin
+        state: present
+    - authorized_key: # authorized_key module
+        user: admin
+        key: "{{ lookup('file', '/home/admin/.ssh/id_rsa.pub') }}"
+    - wait_for: # wait_for module
+        port: 80
+        state: started
+    - setup: # setup module
+    - assert: # assert module
+        that: ansible_os_family == 'Debian'
