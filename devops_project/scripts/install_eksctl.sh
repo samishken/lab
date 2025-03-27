@@ -1,18 +1,23 @@
-# Replace amd64 with armv6, armv7 or arm64
- (Get-FileHash -Algorithm SHA256 .\eksctl_Windows_amd64.zip).Hash -eq ((Get-Content .\eksctl_checksums.txt) -match 'eksctl_Windows_amd64.zip' -split ' ')[0]
- ```
+#!/bin/bash
 
-#### Using Git Bash: 
-```sh
-# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
-ARCH=amd64
-PLATFORM=windows_$ARCH
+set -e  # Exit on error
 
-curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.zip"
+echo "Updating system packages..."
+sudo apt update -y
 
-# (Optional) Verify checksum
-curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+echo "Downloading eksctl..."
+curl -sL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz" -o eksctl.tar.gz
 
-unzip eksctl_$PLATFORM.zip -d $HOME/bin
+echo "Extracting eksctl..."
+tar -xzf eksctl.tar.gz
 
-rm eksctl_$PLATFORM.zip
+echo "Moving eksctl to /usr/local/bin/"
+sudo mv eksctl /usr/local/bin/
+
+echo "Cleaning up..."
+rm -f eksctl.tar.gz
+
+echo "Verifying eksctl installation..."
+eksctl version
+
+echo "eksctl installation completed successfully!"
