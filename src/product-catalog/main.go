@@ -1,4 +1,4 @@
-// Copyright The OpenTelemetry Authors  #test 4
+// Copyright The OpenTelemetry Authors  #test 5
 // SPDX-License-Identifier: Apache-2.0
 package main
 
