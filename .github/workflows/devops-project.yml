@@ -47,7 +47,7 @@ jobs:
               with:
                 version: 'v1.55.2'
                 run: golangci-lint run || true  
-                working-directory: src/product-catalog/...
+                working-directory: src/product-catalog
             
     docker:
         runs-on: ubuntu-latest
