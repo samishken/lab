@@ -5,4 +5,9 @@ resources:
   - carts-db-svc.yaml
   - carts-dep.yaml
   - carts-svc.yaml
+
+images:
+  - name: nginx
+    newName: mongo
+    newTag: "base"
   

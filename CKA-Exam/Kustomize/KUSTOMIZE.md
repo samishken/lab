@@ -6,6 +6,13 @@
 ### why kustomize?
 - modify attributes, to fit Different environments 
 
+# kustomize build command
+- print out what it will create `kustomize build k8s/`
+- create`kustomize build k8s/ | kubectl apply -f -`  # 'k8s' is the name of the folder
+- create `kubectl apply -k k8s/`
+- delete `kustomize build k8s/ | kubectl delete -f -`
+- delete `kubectl delete -k k8s/`
+
 ##### folder structure
 - k8s/
 - base/ # deployment manifest file
@@ -23,3 +30,11 @@
 - - prod
 - - - - kustomization.yaml
 - - - - config-map.yaml
+
+
+### Kustomize Transformers
+- commonLabels
+- namespace
+- namePrefix
+- commonAnnotations
+
