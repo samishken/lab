@@ -1,7 +1,7 @@
 # We write tuples in parentheses instead of square brackets.
+
 # fullname = ('Grace', 'M', 'Harper')
 # print(fullname)
-
 
 
 def file_size(file_info):
