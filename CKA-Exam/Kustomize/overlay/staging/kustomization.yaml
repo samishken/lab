@@ -6,6 +6,9 @@ resources:
   - ../../api/
   - ../../cache/
 
+components:
+  - ../../components/db
+
 replicas:
 - name: orders
   count: 2

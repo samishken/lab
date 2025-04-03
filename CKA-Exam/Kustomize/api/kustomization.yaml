@@ -3,4 +3,57 @@ kind: Kustomization
 resources:
   - api-dep.yaml
   - api-service.yaml
-  
+
+# to add
+patches:
+  - target:
+      kind: Deployment
+      name: api-deployment
+    patch: |-
+     - op: add path: /spec/template/spec/containers/-
+       value: 
+         name: haproxy
+         image: haproxy
+
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+        - name: haproxy
+          image: haproxy
+# to delete
+patches:
+  - target:
+      kind: Deployment
+      name: api-deployment
+    patch: |-
+     - op: remove path: /spec/template/spec/containers/1
+
+---
+# label-patch.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec: 
+  template:
+    spec:
+      containers:
+        - $patch: delete
+           name: haproxy
+
+        
