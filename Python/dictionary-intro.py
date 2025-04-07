@@ -14,3 +14,7 @@ print(employee["position"])
 # add more entry to the dictionary
 employee["department"] = "IT"
 print(employee)
+
+# delete
+del employee["age"]
+print(employee)
