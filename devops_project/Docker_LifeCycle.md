@@ -5,7 +5,7 @@
 - THIRD: Create and run docker container
 
 # kubernetes
-- Run this after deploying k8s cluster: `aws eks update-kubeconfig --region REGION-NAME --name CLUSTER-NAME`
+- Run this after deploying k8s cluster: `aws eks update-kubeconfig --region us-east-1 --name CLUSTER-NAME`
 
 # Docker compose
 - 

@@ -25,7 +25,7 @@ echo $oidc_id
 ```
 ## Check if there is an IAM OIDC provider configured already
 
-- aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4\n 
+- aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 
 If not, run the below command
 - Add IAM Oidc provider to your cluster.
@@ -76,7 +76,7 @@ helm repo update eks
 Install
 
 ```
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=demo-otel-microservices --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-east-1 --set vpcId=<your-vpc-id>
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=demo-otel-microservices --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-east-1 --set vpcId=vpc-06e0721b94bd26607
 ```
 
 Verify that the deployments are running.
