@@ -1,4 +1,4 @@
-name: Terraform-AWS-Services
+name: infra-otel-microservices
 
 on:
   workflow_dispatch:
@@ -22,7 +22,10 @@ jobs:
 
       - name: Terraform Init
         working-directory: devops_project/tf-src/stage/
-        run: terraform init 
+        run: |
+          terraform init \
+            -backend-config "bucket=terraform-state-devops-project-samboo" \
+            -backend-config "key=dev/terraform.tfstate"
       
       - name: Terraform Format
         working-directory: devops_project/tf-src/stage/
