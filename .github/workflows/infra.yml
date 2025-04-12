@@ -33,14 +33,15 @@ jobs:
 
       - name: Terraform validate
         id: validate
+        working-directory: devops_project/tf-src/stage/
         run: terraform validate
 
       - name: Terraform plan
         id: plan
+        working-directory: devops_project/tf-src/stage/
         run: terraform plan -no-color -input=false -out planfile
         continue-on-error: true
 
       - name: Terraform plan status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-
