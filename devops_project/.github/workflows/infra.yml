@@ -26,13 +26,24 @@ jobs:
           terraform init \
             -backend-config "bucket=terraform-state-devops-project-samboo" \
             -backend-config "key=dev/terraform.tfstate"
+     
       - name: Terraform Format
         working-directory: tf-src/stage/
         run: terraform fmt
 
-      # - name: Terraform Plan
-      #   working-directory: Terraform-AWS-Services/elasticsearch/elasticsearch_configuration/
-      #   run: terraform plan -var="environment=development" -var="elasticsearch_password=${{ secrets.ELASTICSEARCH_PASSWORD }}"
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color -input=false -out planfile
+        continue-on-error: true
+
+      - name: Terraform plan status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
 
       # - name: Terraform Apply
       #   working-directory: Terraform-AWS-Services/elasticsearch/elasticsearch_configuration/
