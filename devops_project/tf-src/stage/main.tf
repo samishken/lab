@@ -5,7 +5,7 @@ module "vpc_stage" {
   availability_zones   = var.availability_zones
   private_subnet_cidrs = var.private_subnet_cidrs
   public_subnet_cidrs  = var.public_subnet_cidrs
-  cluster_name         = var.cluster_name
+  cluster_name    = var.cluster_name  
 }
 
 module "eks" {
@@ -16,4 +16,10 @@ module "eks" {
   vpc_id          = module.vpc_stage.vpc_id
   subnet_ids      = module.vpc_stage.private_subnet_ids
   node_groups     = var.node_groups
+}
+
+module "ecr" {
+  source = "./modules/ecr"
+
+  cluster_name    = var.cluster_name
 }
