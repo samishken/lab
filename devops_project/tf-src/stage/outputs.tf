@@ -15,5 +15,5 @@ output "vpc_id" {
 
 output "ecr_repo_name" {
   description = "ECR repository name"
-  value       = module.ecr.ecr_repo_name
+  value       = module.ecr.repo_name
 }
