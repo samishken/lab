@@ -13,7 +13,7 @@ output "vpc_id" {
   value       = module.vpc_stage.vpc_id
 }
 
-output "ecr_repo_name" {
-  description = "ECR repository name"
-  value       = module.ecr.repo_name
-}
+# output "ecr_repo_name" {
+#   description = "ECR repository name"
+#   value       = module.ecr.repo_name
+# }
