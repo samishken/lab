@@ -45,3 +45,9 @@ jobs:
       - name: Terraform plan status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+      
+      - name: Terraform apply
+        id: apply
+        working-directory: devops_project/tf-src/stage/
+        run: terraform apply -auto-approve -input=false -parallelism=1 planfile  # build resources 1 at a time 
+        
