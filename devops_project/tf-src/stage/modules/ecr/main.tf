@@ -16,7 +16,7 @@
 # }
 
 resource "aws_ecr_repository" "otelproject-ecr-repo" {
-  name      = var.cluster_name
+  name      = var.repo_name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -24,6 +24,6 @@ resource "aws_ecr_repository" "otelproject-ecr-repo" {
   }
 
   tags = {
-    Name                                           = "${var.cluster_name}-ecr"
+    Name                                           = "${var.repo_name}-ecr"
   }
 }

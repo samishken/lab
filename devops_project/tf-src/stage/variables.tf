@@ -40,6 +40,12 @@ variable "cluster_version" {
   default     = "1.32"
 }
 
+variable "ecr_repo_name" {
+  description = "ecr repository name"
+  type        = string
+  default     = "home-lab-project-ecr"
+}
+
 variable "node_groups" {
   description = "EKS node group configuration"
   type = map(object({

@@ -21,5 +21,5 @@ module "eks" {
 module "ecr" {
   source = "./modules/ecr"
 
-  cluster_name    = var.cluster_name
+  repo_name = var.ecr_repo_name
 }

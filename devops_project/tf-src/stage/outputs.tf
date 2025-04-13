@@ -12,3 +12,8 @@ output "vpc_id" {
   description = "VPC ID"
   value       = module.vpc_stage.vpc_id
 }
+
+output "ecr_repo_name" {
+  description = "ECR repository name"
+  value       = module.ecr.ecr_repo_name
+}
