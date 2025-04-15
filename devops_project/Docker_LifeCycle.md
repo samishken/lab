@@ -66,3 +66,7 @@
 
  # sudo vi /etc/hosts
  - ingress: url and ip address
+
+
+ # Istio
+ 

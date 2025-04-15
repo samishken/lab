@@ -7,7 +7,7 @@
 ### Ansible Configuration Files
 - Default location of Ansible Configuration file -> `/etc/ansible/ansible.cfg`
 - when using custom Ansible playbooks for different projects, we add the configuration file in each project direcotry. If we don't add the configuration file in the projects then, it'll use the default configuration file.
-- configuration file is separated into different the below sections
+- configuration file is separated into different below sections
 - - [default]
 - - [inventory]
 - - [privilege_escalation]
@@ -240,8 +240,6 @@ web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root a
 - Handlers: we can define an action to restart a service and associate it with a task that modifies the configuration file.  This creates a dependency between that task and the handler. 
 - - - - - - Whenever the configuration file is modfied during the playbook run, the associated handler is triggered ensuring that the service is automatically restarted.
 - Roles: we assign roles to blank servers to make them for example, database server, web-server or backup server.  Installing prerequisites required to make server database or web or backup server.
-- - - - - - `ansible-galaxy init mysql`
-- - - - - - `ansible-galaxy init mysql`
 - - - - - - `ansible-galaxy init mysql`
 - - - - - - roles path
 - Ansible collection: ansible collections are a way to package and distribute ansible content, including modules, roles, plugins and other related assets. 

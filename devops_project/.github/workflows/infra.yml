@@ -18,7 +18,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v4  
 
       - name: Terraform Init
         working-directory: tf-src/stage/

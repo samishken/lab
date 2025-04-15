@@ -10,6 +10,7 @@
    tasks:
      - command: 'echo "{{ item }}"'
        with_items: '{{ fruits }}'
+       
 - name: 'Install required packages'
   hosts: localhost
   become: yes

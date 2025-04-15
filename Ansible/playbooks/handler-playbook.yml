@@ -1,3 +1,6 @@
+# This playbook demonstrates the use of handlers in Ansible.
+# It includes tasks that notify a handler when they change.
+# handlers are used to perform actions when a task changes the state of a resource.
 ---
 - name: Test Handler Execution
   hosts: localhost
