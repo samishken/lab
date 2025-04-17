@@ -4,6 +4,8 @@
 - handles interactions with Hardware (process, memory anddisk memory managements)
 
 ## Core components of a Linux Machine
+
+```plaintext
 +----------------------------------------------------+
 | User Applications (Vim, Docker, Apache, etc.)     |
 +----------------------------------------------------+
