@@ -1,11 +1,12 @@
 # to append the /var/www/html/index.html file on all web nodes. 
 # The line needs to be added is Welcome to ansible-beginning course, 
 # create the index.html file if doesn't exist.
-
+# modules in ansible are used to manage system resources,
+# such as files, packages, and services.
 ---
 - name: 'hosts'
   hosts: all
-  become: yes
+  become: yes 
   tasks:
     - name: 'Execute a script'
       script: '/tmp/install_script.sh'
