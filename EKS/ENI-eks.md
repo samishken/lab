@@ -1,4 +1,10 @@
 ## What are ENIs in EKS?
+- In Amazon EKS, ENIs are used to connect:
+- - EC2 worker nodes (data plane) and
+- - pods running on those nodes to the VPC network — so they can talk to:
+- - - - each other
+- - - - AWS services (e.g., RDS, S3)
+- - - - the public internet (if allowed)
 
 In **Amazon EKS (Elastic Kubernetes Service)**, **ENI** stands for **Elastic Network Interface**. It is a virtual network interface that provides network connectivity for resources in a VPC, and it's crucial for how EKS pods communicate within and outside the cluster.
 

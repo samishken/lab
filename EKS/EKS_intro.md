@@ -2,6 +2,22 @@
 
 Amazon **Elastic Kubernetes Service (EKS)** is a fully managed Kubernetes service provided by AWS. It simplifies running Kubernetes workloads by handling the setup of the **control plane**, **security**, and **high availability**, allowing you to focus on managing your applications.
 
+### what comes with EKS cluster when we create it besides control and data planes?
+* OIDC Endpoint
+- - - - OIDC give us authentication for things that want to call into the cluster and integrate into AWS.
+- - - - We use it to to map ourself to IAM identities.
+* add-ons
+* logging -> aws cloudwatch
+* authentication -> configmaps
+
+### What connects the control plane to the data plane?
+The EKS control plane connects to the worker nodes using:
+- The Kubernetes API (via public or private endpoint)
+- IAM authentication and TLS for secure communication
+- The control plane talks to the nodes using the **Kubelet** and **Kube Proxy** running on those nodes.
+- Communication happens over **HTTPS (port 443)**, and traffic can go over the **public internet** or **private VPC endpoints**, depending on configuration.
+Would you like this saved as a .md file or added to a document?
+
 ---
 
 ## 🧠 EKS Architecture Overview
@@ -10,6 +26,12 @@ Amazon **Elastic Kubernetes Service (EKS)** is a fully managed Kubernetes servic
 - Consists of Kubernetes components like API server, etcd, scheduler, and controller manager.
 - Runs across multiple **Availability Zones (AZs)** for high availability.
 - AWS handles scaling, patching, and maintenance of the control plane.
+- In a region we'll see these components in different AZ's
+- - etcd
+- - api server
+- - scheduler
+- - controller mangers
+
 
 ### 2. **Data Plane** (Customer Managed)
 - Made up of **EC2 worker nodes** or **Fargate** tasks that run your containers (pods).
@@ -24,7 +46,7 @@ Amazon **Elastic Kubernetes Service (EKS)** is a fully managed Kubernetes servic
 
 ## 🖼️ EKS Architecture Diagram
 
-![EKS Control Plane, Data Plane, VPC, and ENI](https://d1.awsstatic.com/diagrams/eks-control-data-plane.3fa7f86a73a32fdf3705e5f9f9806c12b0115e75.png)
+![EKS Control Plane, Data Plane, VPC, and ENI](https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/eks_architecture.png)
 
 **Image Source**: [AWS EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
 
