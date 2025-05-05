@@ -18,6 +18,7 @@
 
 ---
 ## How do we fetch from these external tools?
-- container storage interface (CSI) driver... is used to fetch secrets from Hashicorp Vault and Secrets manager.
 
-- 
+- Container Storage Interface (CSI) driver... is used to fetch secrets from Hashicorp Vault and Secrets manager.
+- the driver will be used to mount the external secret storage tools 
+- CIS driver will go out and fetch secrets from AWS Secret Storage and mount them on the pod as a volume.
