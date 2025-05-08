@@ -58,7 +58,7 @@ variable "node_groups" {
     })
   }))
   default = {
-    general = {
+    otel-microservices-ng = {
       instance_types = ["t3.large"]
       capacity_type  = "ON_DEMAND"
       scaling_config = {
