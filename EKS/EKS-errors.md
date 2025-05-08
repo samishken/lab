@@ -1,0 +1,2 @@
+- `CrashLoopBackOff` - when a container in a pod crashed
+- `OOMKilled` - Out of Memory
