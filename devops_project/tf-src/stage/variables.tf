@@ -59,10 +59,10 @@ variable "node_groups" {
   }))
   default = {
     general = {
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.large"]
       capacity_type  = "ON_DEMAND"
       scaling_config = {
-        desired_size = 2
+        desired_size = 3
         max_size     = 4
         min_size     = 1
       }
