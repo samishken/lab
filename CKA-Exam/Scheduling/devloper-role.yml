@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devloper   # Role name
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"] # Resources to which this role applies
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]  # Allowed actions
+  ressourcesNames: ["blue", "oragne"] # Specific resource names to which this role applies
