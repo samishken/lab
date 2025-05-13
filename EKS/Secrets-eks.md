@@ -1,7 +1,7 @@
 # Secrets
 - Secrets should be rotated & audited on regularly.
 
-### Config Maps
+### ConfigMaps
 
 
 ### Secrets
