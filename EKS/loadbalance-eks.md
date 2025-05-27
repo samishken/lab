@@ -4,12 +4,28 @@
 - How services interacts with the infrastructure?
 - How services interact with Load Balancers in general?
 - How the AWS Load Balancer Controller can create and manage Load Balancers that connect to services inside a Kubernetes cluster?
+- Kube-proxy directs network traffic to pods within a Kubernetes cluster by maintaining network rules on each node. It primarily uses iptables in its default mode to route traffic between services and pods. 
+- Kube-proxy watches the Kubernetes API server for new services and updates its network rules accordingly, ensuring traffic is routed to the correct backend pods
+- kube-proxy knows how to send the pods to the right pod.  It will take the traffic and route it to the right pod.
+
+
+``` External users
+    --> LOAD BALANCER 
+            ------->   ____________________________  
+                       |k8s cluster    
+                       | -> Node-|
+                       |    ----> pods - pods - pods
+                       |___________________________
+```
+
 
 ### LoadBalancer
 - Load Balancer controller: helps use get loadbalancers (ALB, NLB)
-- Node
+- Cluster -> Node -> Pods -> kube-proxy
+- Load balancer outside of the cluster
+- load balancer inside of the cluster:  looks for Annotations  (ALB or NLB)
 - Global LoadBalancer: lives outside of regions.  
-- 
+
 
 ### Gateway Ingress
 - Ingress rules   opentelemetry-demo-frontend   opentelemetry-demo-frontendproxy

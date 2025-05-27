@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-proxy
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  ingressClassName: alb
+  rules:
+    - host: samboo.example.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: opentelemetry-demo-frontendproxy
+                port:
+                  number: 8080
+Console URL	https://471112677231.signin.aws.amazon.com/console?region=us-east-1
+Username	kk_labs_user_776142
+Password	i!HRD%fECE1H
+Start Time	Mon May 26 18:49:48 UTC 2025
+End Time	Mon May 26 19:49:48 UTC 2025
+
+
+You can run the showcreds command anytime to retrieve these credentials.
+
+
+
+To display or hide the terminal of the
+
+
+
+NodeAutoScalingGroup = "eks-cluster-stack-NodeGroup-osedj2MGPWub"
+NodeInstanceRole = "arn:aws:iam::471112677231:role/eksWorkerNodeRole"
+NodeSecurityGroup = "sg-03d5253813d3c0fb0"
