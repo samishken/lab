@@ -27,17 +27,17 @@ resource "aws_instance" "my_server" {
     command = "echo ${self.private_ip} >> private_ips.txt"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "echo ${self.private_ip} >> /home/ubuntu/private_ips.txt"
-    ]
-    # connection {
-    #   type = "ssh"
-    #   user = "ubuntu"
-    #   #private_key = "${file("home/shaile/ssh/lenovo.pub")}"
-    #   host = self.public_ip
-    # }
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "echo ${self.private_ip} >> /home/ubuntu/private_ips.txt"
+  #   ]
+  # connection {
+  #   type = "ssh"
+  #   user = "ubuntu"
+  #   #private_key = "${file("home/shaile/ssh/lenovo.pub")}"
+  #   host = self.public_ip
+  # }
+  # }
 
   # allows you to change what happens to resources e.g. create, update, destroy.
   lifecycle {

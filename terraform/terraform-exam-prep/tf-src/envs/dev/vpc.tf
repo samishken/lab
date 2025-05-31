@@ -10,6 +10,8 @@ module "exam-prep-vpc" {
 
   tags = {
     Terraform   = "true"
-    Environment = "${local.environment}-${local.project_name}"
+    Name        = "${local.environment}-${local.project_name}-exam-prep-vpc"
+    Project     = "${local.project_name}"
+    Environment = "${local.environment}"
   }
 }
