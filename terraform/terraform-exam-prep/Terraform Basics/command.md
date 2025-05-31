@@ -23,6 +23,14 @@
 - `Alias` - more study
 
 
+# Drift
+### Replace - more study
+- `terraform apply -replace=aws_instance.myserver`
+- The terraform replace command is used when you want to force the replacement of a specific resource in your infrastructure. 
+- This is helpful in cases where a resource is behaving incorrectly, is corrupted, or needs to be recreated due to external changes that Terraform cannot detect.
 
-# Terraform Init
-- 
+### Import - a little study
+
+### Refresh (Refresh only) - more study: `-refresh-only`
+- Imagine you create a terraform script that deploys a Virtual Machine on AWS
+- You ask an engineer to terminate the server, and instead of updating the terraform script they mistakenly terminate the server via the AWS Console.
