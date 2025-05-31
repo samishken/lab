@@ -18,9 +18,18 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.0.0-beta2"
     }
+    # google = {
+    #   source = "hashicorp/google"
+    #   version = "6.37.0"
+    # }
   }
 }
 
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
+}
+
+provider "google" {
+  alias  = "west"
+  region = "us-west-1"
 }
