@@ -14,6 +14,7 @@
 - `-var-file=vars.tfvars`: This flag tells Terraform to load variable values from the file `vars.tfvars`. This file is typically written in HCL (HashiCorp Configuration Language) or JSON format and defines values for input variables used in the configuration.
 - `terraform plan -var instance_type="t2.medium"` variable precedence
 - `terraform apply -refresh-only` Re-evaluate the current infrastructure state from the real resources (refresh)
+- The `-backend-config` flag for terraform init can be used for partial backend configuration
 
 
 # Built in functions
@@ -34,3 +35,6 @@
 ### Refresh (Refresh only) - more study: `-refresh-only`
 - Imagine you create a terraform script that deploys a Virtual Machine on AWS
 - You ask an engineer to terminate the server, and instead of updating the terraform script they mistakenly terminate the server via the AWS Console.
+
+---
+- terraform remote state (get information from different folder using  `data "aws_s3_bucket" "bucket_name"`)

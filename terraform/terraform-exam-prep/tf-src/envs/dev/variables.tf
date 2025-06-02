@@ -24,3 +24,10 @@ variable "worlds_splat" {
   description = "List of worlds"
   type        = list(any)
 }
+
+variable "workspace_iam_role" {
+  default = {
+    staging = "arn:aws:iam::STAGING-ACCOUNT-ID:role/staging-role"
+    production = "arn:aws:iam::PRODUCTION-ACCOUNT-ID:role/production-role"
+  }
+}
