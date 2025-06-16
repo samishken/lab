@@ -3,10 +3,29 @@
 ## Introduction to Process Management
 A process is an instance of a running program. Linux provides multiple utilities to monitor, manage, and control processes effectively. Each process has a unique **Process ID (PID)** and belongs to a parent process.
 
-## Index of Commands Covered
+## Operating system Performs
+- CPU management
+- CPU scheduling
+- Memory management
+- File system management
+- Network management
+
+## Storage
+- `Memory` is temporary, fast, and volatile, used for actively running programs and data. 
+- `Storage` is long-term, slower, and non-volatile, holding programs and files for indefinite periods
+
+## Index of Commands 
+
+## Process management
+- view (check) running processes
+- kill, stop, resume processes
+- prioritize or deprioritize processes 
 
 ### Viewing Processes
-- `ps aux` – View all running processes
+- `ps aux` – View all running processes  
+- `ps aux | nl` - number of lines (number of processes running on the linux server)
+- `ps aux | wc -l`  - counting line number giving us the number of processes running on the linux server
+- `ps -ef` - differs from `ps aux` because it will not show CPU and MEMORY utilization
 - `ps -u username` – View processes for a specific user
 - `ps -C processname` – Show a process by name
 - `pgrep processname` – Find a process by name and return its PID
