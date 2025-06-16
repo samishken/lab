@@ -25,6 +25,8 @@ A process is an instance of a running program. Linux provides multiple utilities
 - `ps aux` – View all running processes  
 - `ps aux | nl` - number of lines (number of processes running on the linux server)
 - `ps aux | wc -l`  - counting line number giving us the number of processes running on the linux server
+- `ps aux --sort=-%cpu | head -n 11` - top 10 Processes by CPU Usage
+- `ps aux --sort=-%mem | head -n 11` - top 10 Processes by Memory Usage
 - `ps -ef` - differs from `ps aux` because it will not show CPU and MEMORY utilization
 - `ps -u username` – View processes for a specific user
 - `ps -C processname` – Show a process by name
@@ -38,8 +40,8 @@ A process is an instance of a running program. Linux provides multiple utilities
 - `pkill -9 processname` – Kill all instances of a process
 - `kill -STOP PID` – Stop a running process
 - `kill -CONT PID` – Resume a stopped process
-- `renice -n 10 -p PID` – Lower priority of a process
-- `renice -n -5 -p PID` – Increase priority of a process (requires root)
+- `renice -n 10 -p PID` – Lower priority of a process ( positive number lower priority)
+- `renice -n -5 -p PID` – Increase priority of a process (requires root) (negative number increases priority)
 
 ### Background & Foreground Processes
 - `command &` – Run a command in the background
@@ -50,9 +52,19 @@ A process is an instance of a running program. Linux provides multiple utilities
 
 ### Monitoring System Processes
 - `top` – Interactive process viewer
-- `htop` – User-friendly process viewer (requires installation)
+- `top -d 10` shows top ten
+- `htop` – User-friendly process viewer (requires installation) - same as `top` just user-friendly.
 - `nice -n 10 command` – Run a command with a specific priority
 - `renice -n -5 -p PID` – Change priority of an existing process
+- `top` Sort by CPU Usage: Press `Shift + P` to sort the processes by CPU usage (highest to lowest).
+- `top` Sort by Memory Usage: Press `Shift + M` to sort the processes by memory usage (highest to lowest).
+- `top -d 10` - use the -d option to make top update the display at a regular interval (e.g., every 0 second)
+
+
+## What are services?
+- Services run in the background.
+- when a server restarts `services` start automatically.  While `processes` need users to start them.
+- `systemctl` used to get information about services running on linux machine
 
 ### Daemon Process Management
 - `systemctl list-units --type=service` – List all system daemons
