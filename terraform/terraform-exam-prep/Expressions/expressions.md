@@ -51,7 +51,7 @@ worlds_map={
 
 ## Splat Operations
 ## — Splat Expressions
-- A splat expression provides a shorter expression for for expressions
+- A splat expression provides a shorter expression for 'for' expressions
 
 `What is a splat operator?`
 - A splat operator is represented by an asterisk (*), it originates from the ruby language
