@@ -2,7 +2,7 @@
 
 Amazon **Elastic Kubernetes Service (EKS)** is a fully managed Kubernetes service provided by AWS. It simplifies running Kubernetes workloads by handling the setup of the **control plane**, **security**, and **high availability**, allowing you to focus on managing your applications.
 
-### what comes with EKS cluster when we create it besides control and data planes?
+### What comes with EKS cluster when we create it besides control and data planes?
 * OIDC Endpoint
 - - - - OIDC give us authentication for things that want to call into the cluster and integrate into AWS.
 - - - - We use it to to map ourself to IAM identities.
