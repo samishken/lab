@@ -1,30 +1,14 @@
 # Introduction to Amazon EKS
 
 Amazon **Elastic Kubernetes Service (EKS)** is a fully managed Kubernetes service provided by AWS. It simplifies running Kubernetes workloads by handling the setup of the **control plane**, **security**, and **high availability**, allowing you to focus on managing your applications.
-
-### What comes with EKS cluster when we create it besides control and data planes?
-* OIDC Endpoint
-- - - - OIDC give us authentication for things that want to call into the cluster and integrate into AWS.
-- - - - We use it to to map ourself to IAM identities.
-* add-ons
-* logging -> aws cloudwatch
-* authentication -> configmaps
-
-### What connects the control plane to the data plane?
-The EKS control plane connects to the worker nodes using:
-- The Kubernetes API (via public or private endpoint)
-- IAM authentication and TLS for secure communication
-- The control plane talks to the nodes using the **Kubelet** and **Kube Proxy** running on those nodes.
-- Communication happens over **HTTPS (port 443)**, and traffic can go over the **public internet** or **private VPC endpoints**, depending on configuration.
-Would you like this saved as a .md file or added to a document?
-
----
+- EKS is the hosted Service for Kubernetes
 
 ## 🧠 EKS Architecture Overview
 
 ### 1. **Control Plane** (Managed by AWS)
 - Consists of Kubernetes components like API server, etcd, scheduler, and controller manager.
 - Runs across multiple **Availability Zones (AZs)** for high availability.
+- In a region we'll have a minimum of 3 AZ's to spread etcd, controller managers, scheduler and api server.
 - AWS handles scaling, patching, and maintenance of the control plane.
 - In a region we'll see these components in different AZ's
 - - etcd
@@ -65,3 +49,24 @@ Would you like this saved as a .md file or added to a document?
 
 Amazon EKS abstracts away the complexity of managing Kubernetes infrastructure. It offers a scalable and secure way to run containerized workloads, with full AWS-native networking support via **VPC and ENIs**.
 
+### What comes with EKS cluster when we create it together with control plane components?
+* OIDC Endpoint
+- - - - OIDC gives us authentication for things that we want to call into the cluster and integrate into AWS.
+- - - - We use it to to map ourself to IAM identities.
+- - - - `OIDC` endpoints: are also part of an EKS cluster BUT that aren't necessarily parts of a Kubernetes cluster.
+- - - - OIDC gives us authentication for things that want to call into cluster and integrate into AWS.  Map to IAM roles.
+- - - - `AWS CloudWatch` for logging needs to be enabled.
+- - - - `NODE GROUPS`- affects the Data Plane.
+- - - - `ADD ONS`: runs workloads inside the cluster.
+- - - - authentication -> configmaps
+
+--- 
+### What connects the control plane to the data plane?
+The EKS control plane connects to the worker nodes using:
+- The Kubernetes API (via public or private endpoint)
+- IAM authentication and TLS for secure communication
+- The control plane talks to the nodes using the **Kubelet** and **Kube Proxy** running on those nodes.
+- Communication happens over **HTTPS (port 443)**, and traffic can go over the **public internet** or **private VPC endpoints**, depending on configuration.
+Would you like this saved as a .md file or added to a document?
+
+--- 

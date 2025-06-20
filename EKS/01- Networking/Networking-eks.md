@@ -2,7 +2,9 @@
 
 ### AWS Networking
 - pods inside cluster should be able to talk to one another
-* VPC: network boundary for ourselves. Eni to connect with control plane.
+* VPC: network boundary for ourselves. Eni to connect with control plane. 
+- - - -  We don't want to create more than one cluster per VPC. We are going to start using a lot of the IP addresses quickly for every pod.
+
 * * -> Subnet: anthing inside the vpc gets ip address.
 * * * -> Node: in the cluster.
 * * * * -> ENI: attached to the node like an outlet.  IP address will be attached to it like a cable. 
